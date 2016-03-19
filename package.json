@@ -1,0 +1,18 @@
+{
+  "name": "Treemap_Annotation",
+  "version": "0.0.0",
+  "description": "Create a dynamic treemap of annotation data ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "annotation",
+    "treemap"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
