@@ -48,7 +48,7 @@
 			
 			<div class = "col-lg-8 col-lg-offset-2">
 	
-			<h2>What is this site? Hihihi</h2>
+			<h2>What is this site?</h2>
 		
 			<p class = "abstract" align ="justify">
 
@@ -59,13 +59,16 @@ Quae dum ita struuntur, indicatum est apud Tyrum indumentum regale textum occult
 Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam mediocre condimentum amicitiae. Tristitia autem et in omni re severitas habet illa quidem gravitatem, sed amicitia remissior esse debet et liberior et dulcior et ad omnem comitatem facilitatemque proclivior.
 </p>
 		
-			</div>
+			<form 	id        =  "uploadForm"
+			     	enctype   =  "multipart/form-data"
+     				action    =  "/api/photo"
+     				method    =  "post"
+			>
 			
-			<div class = "Input_file">
-			
-			<input name="target_file_name" type="FILE">
-			
-			</div>
+				<input name="file_name" type="FILE">
+				<input type="submit" value="Upload Image" name="submit">
+
+			</form>
 
 		</body>
 	
