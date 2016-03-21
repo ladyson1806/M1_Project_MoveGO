@@ -1,3 +1,7 @@
+/*************************************************************************************/
+/* Visualisation des données du fichier "tree_data.js" sous forme de treemap          */
+/* Il faut qu'il soit integré dans l'html avec : <script src="tree_visu2.js"></script>*/
+/*************************************************************************************/
 
 /* Les fonctions de couleurs ne marchent pas */
 function rgbToHsv(r, g, b) {
