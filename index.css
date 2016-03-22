@@ -12,18 +12,18 @@ h6 {
 }
 
 html{
-    background: grey;
+    background: #002D43;
 }
 
 .nav {
 	border: 1px solid #333;
-	border-top-color: #707070;
-	background-color: #5E5E5E;
-	background: -moz-linear-gradient(bottom , #666666 0pt, #5E5E5E 50%, #707070 51%, #808080 100%) repeat scroll 0 0 transparent;
-	background: -webkit-linear-gradient(bottom , #666666 0pt, #5E5E5E 50%, #707070 51%, #808080 100%) repeat scroll 0 0 transparent;
-	background: -ms-linear-gradient(bottom , #666666 0pt, #5E5E5E 50%, #707070 51%, #808080 100%) repeat scroll 0 0 transparent;
-	background: -o-linear-gradient(bottom , #666666 0pt, #5E5E5E 50%, #707070 51%, #808080 100%) repeat scroll 0 0 transparent;
-	background: linear-gradient(bottom , #666666 0pt, #5E5E5E 50%, #707070 51%, #808080 100%) repeat scroll 0 0 transparent;
+	border-top-color: #8FC7F6;
+	background-color: #8FC7F6;
+	background: -moz-linear-gradient(bottom , #666666 0pt, #8FC7F6 50%, #8FC7F6 51%, #8FC7F6 100%) repeat scroll 0 0 transparent;
+	background: -webkit-linear-gradient(bottom , #666666 0pt, #8FC7F6 50%, #8FC7F6 51%, #8FC7F6 100%) repeat scroll 0 0 transparent;
+	background: -ms-linear-gradient(bottom , #666666 0pt, #8FC7F6 50%, #8FC7F6 51%, #8FC7F6 100%) repeat scroll 0 0 transparent;
+	background: -o-linear-gradient(bottom , #666666 0pt, #8FC7F6 50%, #8FC7F6 51%, #8FC7F6 100%) repeat scroll 0 0 transparent;
+	background: linear-gradient(bottom , #666666 0pt, #8FC7F6 50%, #8FC7F6 51%, #8FC7F6 100%) repeat scroll 0 0 transparent;
 	text-align: center;
 	height: 36px;
 	-webkit-box-shadow: 0 1px 3px #999;
@@ -84,8 +84,8 @@ html{
 }
     
 body {
-	color:black;
-	background-color:grey;
+	color:white;
+	background-color:#002D43;
 	/*background-image:url(images/image_de_fond.png);*/
 }
 	
@@ -98,7 +98,6 @@ body {
 	
 .abstract {
 	color : white;
-	background-color: #696969;
 	margin: 5px 5px 5px 5px;
 	padding: 5px 5px 5px 5px;
 }
@@ -114,5 +113,4 @@ body {
 	margin: 100px 100px 100px 100px;
 	padding: 5px 5px 5px 5px;
 }
-
 
