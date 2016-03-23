@@ -56,7 +56,7 @@ We can access all these data through "req.files.size" for example
 
 
 // Root page
-app.use(express.static(__dirname+"/index"));
+app.use(express.static(__dirname+"/"));
 
 
 
