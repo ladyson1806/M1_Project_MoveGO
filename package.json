@@ -1,6 +1,6 @@
 {
   "name": "Treemap_Annotation",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Create a dynamic treemap of annotation data ",
   "main": "main.js",
   "scripts": {
@@ -13,6 +13,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "multer": "^1.1.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "should": "~7.1.0",
+    "mocha": "~2.3.3",
+    "supertest": "~1.1.0"
   }
 }
