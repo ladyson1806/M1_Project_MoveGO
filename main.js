@@ -69,11 +69,13 @@ app.post('/treemap_vis',function(req,res){
         }
 
         // Convert csv file into JS objet
-        var object = script.objecting_csv(req.file.path);
+        var tmp_obj = script.objecting_csv(req.file.path);
+        script.write(JSON.stringify(tmp_obj));
+
+        // Transform the JS object containing clusters into a JS objects containing all information
+        var final_object = script.make_final_obj(tmp_obj);
 
 
-        //script.write(JSstr);
-        
         res.end("Good job!");
 
         // Tranform received file into JSON mixed with MongoDataBase data
