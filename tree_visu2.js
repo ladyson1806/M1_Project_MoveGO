@@ -1,9 +1,8 @@
-/*************************************************************************************/
-/* Visualisation des données du fichier "tree_data.js" sous forme de treemap          */
-/* Il faut qu'il soit integré dans l'html avec : <script src="tree_visu2.js"></script>*/
-/*************************************************************************************/
+var markRev = {};
+var canvas = document.getElementById('fatum-demo');
+labelsList={};
+T_SIZE = 0.2; //taille du texte des labels
 
-/* Les fonctions de couleurs ne marchent pas */
 function rgbToHsv(r, g, b) {
     r /= 255;
     g /= 255;
@@ -30,7 +29,7 @@ function rgbToHsv(r, g, b) {
 }
 
 function hsvToRgb(h, s, v) {
-
+2
     h = h / 360 * 6;
     s = s / 100;
     v = v / 100;
@@ -67,8 +66,6 @@ function changeSize(elem, k) {
   });
 }
 
-var markRev = {
-};
 
 var hstatic = 0;
 function changeColor(elem, grey) {
@@ -103,7 +100,7 @@ function changeColor(elem, grey) {
           elem.color= hsvToRgb(hsv[0], hsv[1], hsv[2]);
         }
       }
-      if (elem.mark != undefined) {
+      if (elem.markt != undefined) {
         elem.markt.color(elem.color);
       }
     };
@@ -123,6 +120,7 @@ function recSum(elem) {
   elem.size = sum;
   return sum;
 }
+
 
 var tmap = function (elem, depth, x0, y0, x1, y1, s) {
   if (elem.markt == undefined) {
@@ -155,29 +153,76 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s) {
     dalpha = (y1 - y0) / elem.size;
   else
     dalpha = (x1 - x0) / elem.size;
-  if (elem.children != undefined)
-  for (var i in elem.children) {
-    if (s)
-      y1 = y0 + elem.children[i].size * dalpha;
-    else
-      x1 = x0 + elem.children[i].size * dalpha;
-    tmap(elem.children[i], depth + 1, x0, y0, x1, y1, !s);
-    if (s)
-      y0 = y1;
-    else
-      x0 = x1;
-  }
+
+	var name;
+	var label;
+	if (elem.children != undefined)
+		for (var i in elem.children) {
+			if (s)
+				y1 = y0 + elem.children[i].size * dalpha;
+			else
+				x1 = x0 + elem.children[i].size * dalpha;
+	
+			tmap(elem.children[i], depth + 1, x0, y0, x1, y1, !s); 
+			 if (s)
+				y0 = y1;
+			else
+				x0 = x1;
+		}
+	else {
+		name = elem.name;	
+		var r = 0; //rotation du label, par defaut la disposition est orizontale
+		var rectCenterX = (x0+x1)/2;
+	    var rectCenterY = (y0+y1)/2;	
+		
+		//Si la chaine entière peut se entrer orizontalement ou verticalement dans le rectangle
+		if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
+			//Si la chaine peut entrer verticalement seulement
+			if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
+				r = 1.57; //rotation de 90° (en radians)
+			
+			label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+			labelsList[name] = label;
+		}	
+		
+		//Autrement : separation de la chaîne de charactères
+		else {
+			var tmp = name.split(" ");
+			for (var i=0; i<tmp.length; i++)
+				if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
+					//Si la chaine separée n'entre pas, on ne mets pas le label
+					return;
+			for (var i=0; i<tmp.length; i++){
+				var word = tmp[i];
+				label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r); 
+				labelsList[word] = label;
+			}
+		}	
+	}   
+}
+
+
+function clearLabels(){
+	for (var label in labelsList){
+		labelsList[label].textColor(0,0,0,0); //rendre le label transparent
+		//console.log(labelsList[label]); //test
+	}
 }
 
 function updateMarks() {
-  tmap(data, 1, - 8, - 4.75, - 3, 2.5, true);
+	clearLabels();
+	tmap(data, 1, - 8, - 4.75, - 3, 2.5, true);
 }
 
-var canvas = document.getElementById('fatum-demo');
+
 var treeInteractor = function (e) {
-  var rect = canvas.getBoundingClientRect();
+  var rect = canvas.getBoundingClientRect();  
   var pickX = e.clientX - rect.left;
-  var pickY = canvas.height - e.clientY + rect.top;
+  //console.log("canvas top, bottom, left, right "+rect.top+" "+rect.bottom+" "+ rect.left+" "+rect.right);
+  //var pickY = canvas.height - e.clientY + rect.top;
+  var pickY = e.clientY - rect.top;
+  //console.log("x, y choisis "+e.clientX+" "+e.clientY);
+  //console.log(pickX+" "+pickY);
   var m = window.fatum.pick(pickX, pickY);
   if(!m) return;
   changeSize(data, 1); // s * k = G / 2
@@ -193,9 +238,8 @@ var treeInteractor = function (e) {
 var initVis = function () {
   window.fatum = Fatum.createFatumContext(canvas);
   Fatum.setRenderingObserver(fatum);
-  Fatum.setMouseMoveHandler(canvas, fatum);
   canvas.onclick = treeInteractor;
-  fatum.layerOn(Fatum.MARKS);
+  fatum.layerOn(Fatum.MARKS | Fatum.TEXT);
   recSum(data);
   updateMarks();
   changeColor(data, false);
