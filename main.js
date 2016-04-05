@@ -89,12 +89,6 @@ app.post('/',function(req,res,next){
   });
 
 
-app.use('/treemap_vis', express.static(__dirname+"/public/visualisation"));
-
-
-
-
-
 // Create server
 app.listen(3000, function () {
   console.log('listening on port 3000!');
