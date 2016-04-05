@@ -80,7 +80,7 @@ app.post('/',function(req,res,next){
 
       // Transform the JS object containing clusters into a JS objects containing all information
       var data = script.convert_to_treemap_format(tmp_obj);
-      script.write('var data = '+JSON.stringify(data), 'ON_SERVER/data/data.js');
+      script.write('var data = '+JSON.stringify(data), 'public/visualisation/data.js');
 
       res.redirect('/treemap_vis');
 
