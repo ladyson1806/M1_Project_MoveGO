@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-	
-<html>
-
-	<head>
-	
-	<meta charset="utf-8"></meta>
-		
-	<meta name="author" content ="Baba BARO - Savandara BESSE 
-								- Kristina KASTANO- Alexia SOUVANE"></meta>
-		
-	<title>Homepage - ANNOT-GENES</title>
-	
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 	
+	 	<title>Visualisation - ANNOT-GENES</title>
+   
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-	<link href='index.css' rel='stylesheet' type='text/css'>
+	<link href='../index/index.css' rel='stylesheet' type='text/css'>
 	
 	<script type="text/javascript" src="index.js"></script>
 				
@@ -24,7 +20,7 @@
 	    <nav id ="nav" role="navigation">
             <div>
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index/idex.html">Home</a></li>
                     <li><a href="#Overview">Overview</a></li>
                     <li><a href="#Sources">Sources</a></li>
                     <li><a href="#Contact">Contact</a></li>
@@ -33,103 +29,39 @@
     	</nav>
     	
     	</header>
+    	
+      	<div class="col-md-9" role="main">
+
+		<h1 id="tree-visualizations" align="center">Treemap visualization</h1>
 	
-    	<section>
-    		<div class="banner">
-    					<h1 align ="center">ANNOT-GENES</h1>
-    					<h3 align ="center">WEB visualization tool for functional annotation of genes</h2>
-			</div>
-		
-		</section>
-		
-		<section id="Overview">
-		
-			<div class = "col-lg-8 col-lg-offset-2">
-			<br>
-			<h3>Goal of this site</h3>
-		
-			<p class = "abstract" align ="justify">
-
-Cum saepe multa, tum memini domi in hemicyclio sedentem, ut solebat, cum et ego essem una et pauci admodum familiares, in eum sermonem illum incidere qui tum forte multis erat in ore. Meministi enim profecto, Attice, et eo magis, quod P. Sulpicio utebare multum, cum is tribunus plebis capitali odio a Q. Pompeio, qui tum erat consul, dissideret, quocum coniunctissime et amantissime vixerat, quanta esset hominum vel admiratio vel querella.<br>
-
-Quae dum ita struuntur, indicatum est apud Tyrum indumentum regale textum occulte, incertum quo locante vel cuius usibus apparatum. ideoque rector provinciae tunc pater Apollinaris eiusdem nominis ut conscius ductus est aliique congregati sunt ex diversis civitatibus multi, qui atrocium criminum ponderibus urgebantur.<br>
-
-Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam mediocre condimentum amicitiae. Tristitia autem et in omni re severitas habet illa quidem gravitatem, sed amicitia remissior esse debet et liberior et dulcior et ad omnem comitatem facilitatemque proclivior.
-</p>
-
-		</section>
-		
-		<section>
-		
-		<div id ="upload">
-		
-			<form 	id        =  "uploadForm"
-			     	enctype   =  "multipart/form-data"
-     				action    =  "/treemap_vis"
-     				method    =  "post">
-			
-			<p align = center>
-			<br>
-				ADD YOUR FILE .CSV HERE :<br>
-			<br>
-				<input type="file" value="Browse..." name="file_name" align="center">
-			<br><br>
-			</p>
-			
-			<div align="center" class="bouton">
-				<input type="button" value="Add another file..." onclick="howMany_Files()"/>
-			</div>
-		</div>
-		
-		<div id="upload_plus_one">
-		
-		</div>
-		
-		<div id="upload_plus_two">
-		
-		</div>
-		
-		<div id="upload_plus_three">
-		
-		</div>
-
-		</section>
-		
-		
-		<section class ="filters">
-		
-		<table border="0">
-		
-		<tr>
-			<td>
-			<p>Classification by<p>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-			<SELECT size=1 name=filters>
-			<option value="Frequency term">Frequency term</option>
-			<option value="Others">Other</option>
-			</SELECT>
-			</td>
-		</tr>
-		
-		</table>
-	
-	
-		<p align="center">
-		<br>
-		<br>
-		<INPUT type="submit" value="Run Visualisation" name="Run Visualisation"></p>
-		
-		</section>
-
-		</form>
+	<!-- Fenêtre qui contient la visualisation-->
+	<canvas id="fatum-demo" align="center" style="border: solid 50px; width: 350px; height: 500px">
+		Sorry, your browser does not support the canvas element
+	</canvas>
 
 
-		</body>
-	
+	  
+	  <!-- ACCES A LA BIBLIOTHEQUE FATUM -->
+	  
+	  <!-- 1. AVEC L'URL - ÇA NE MARCHE PAS
+	      <script>
+		var prefix = "www.labri.fr/perso/aperrot/resources/fatum/"
+		Fatum = {memoryInitializerPrefixURL:prefix, filePackagePrefixURL:prefix};
+	      </script>
+	      <script src="http://www.labri.fr/perso/aperrot/resources/fatum/fatum.js"></script> -->
+
+	  <!-- 2. AVEC LE FICHIER du package dans le repertoire -->
+	  <script src="fatum.js"></script>
+
+
+	  <!-- CHARGEMENT DONNEES -->  
+	  <script src="data.js"></script>
+
+	  <!-- SCRIPT POUR LA VISUALISATION-->
+	  <script src="tree_visu.js"></script>
+	</p>
+
+    </body>
 </html>
 
 
