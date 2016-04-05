@@ -75,12 +75,12 @@ app.post('/',function(req,res,next){
     
       // Convert csv file into JS objet
       var tmp_obj = script.objecting_csv(req.file.path);
-      script.write(JSON.stringify(tmp_obj), req.file.fieldname+'.json');
+      //script.write(JSON.stringify(tmp_obj), req.file.fieldname+'.json');
 
 
       // Transform the JS object containing clusters into a JS objects containing all information
       var data = script.convert_to_treemap_format(tmp_obj);
-      //script.write('var data = '+JSON.stringify(data), 'ON_SERVER/data/data.js');
+      script.write('var data = '+JSON.stringify(data), 'ON_SERVER/data/data.js');
 
       res.redirect('/treemap_vis');
 
