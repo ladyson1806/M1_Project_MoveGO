@@ -122,83 +122,103 @@ function recSum(elem) {
 }
 
 
-var tmap = function (elem, depth, x0, y0, x1, y1, s) {
-  if (elem.markt == undefined) {
-    elem.markt = window.fatum.addMark();
-    markRev[elem.markt.id()] = elem;
-    elem.markt.clippingStart(0).clippingStop(0);
-    elem.markt.internalClipping(0);
-    elem.markt.shape(Fatum.Shape.SQUARE);
-    elem.markt.borderColor(0, 0, 0, 255);
-    elem.markt.borderWidth(1);
-  }
-  var w = (x1 - x0);
-  var h = (y1 - y0);
-  elem.markt.x((x0 + x1) / 2).y((y0 + y1) / 2);
-  elem.markt.width(w).height(h);
-  if (w < 0.1 || h < 0.1) {
-    elem.markt.borderWidth(1);
-    elem.markt.alpha(0);
-  }
-  else {
-    x0 += 0.1;
-    x1 -= 0.1;
-    y0 += 0.1;
-    y1 -= 0.1;
-    elem.markt.borderWidth(1);
-    elem.markt.alpha(255);
-  }
-  var dalpha = 0;
-  if (s)
-    dalpha = (y1 - y0) / elem.size;
-  else
-    dalpha = (x1 - x0) / elem.size;
+var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
+    if (elem.markt == undefined) {
+	elem.markt = window.fatum.addMark();
+	markRev[elem.markt.id()] = elem;
+	elem.markt.clippingStart(0).clippingStop(0);
+	elem.markt.internalClipping(0);
+	elem.markt.shape(Fatum.Shape.SQUARE);
+	elem.markt.borderColor(0, 0, 0, 255);
+	elem.markt.borderWidth(1);
+    }
+    var w = (x1 - x0);
+    var h = (y1 - y0);
+    elem.markt.x((x0 + x1) / 2).y((y0 + y1) / 2);
+    elem.markt.width(w).height(h);
+    if (w < 0.1 || h < 0.1) {
+	elem.markt.borderWidth(1);
+	elem.markt.alpha(0);
+    }
+    else {
+	x0 += 0.1;
+	x1 -= 0.1;
+	y0 += 0.1;
+	y1 -= 0.1;
+	elem.markt.borderWidth(1);
+	elem.markt.alpha(255);
+    }
+    var dalpha = 0;
+    if (s)
+	dalpha = (y1 - y0) / elem.size;
+    else
+	dalpha = (x1 - x0) / elem.size;
 
-	var name;
-	var label;
-	if (elem.children != undefined)
-		for (var i in elem.children) {
-			if (s)
-				y1 = y0 + elem.children[i].size * dalpha;
-			else
-				x1 = x0 + elem.children[i].size * dalpha;
+    var name;
+    var label;
+    //Presence d'enfants, appel recursif à la fonction
+    if (elem.children != undefined){
+	for (var i in elem.children) {
+	    if (s)
+		y1 = y0 + elem.children[i].size * dalpha;
+	    else
+		x1 = x0 + elem.children[i].size * dalpha;
+	    
+	    tmap(elem.children[i], depth + 1, x0, y0, x1, y1, !s, m); 
+	    if (s)
+		y0 = y1;
+	    else
+		x0 = x1;
+	}
+    }
+    //Pas d'enfants, affichage
+    else {
 	
-			tmap(elem.children[i], depth + 1, x0, y0, x1, y1, !s); 
-			 if (s)
-				y0 = y1;
-			else
-				x0 = x1;
-		}
+	name = elem.name;	
+	var r = 0; //rotation du label, par defaut la disposition est orizontale
+	var rectCenterX = (x0+x1)/2;
+	var rectCenterY = (y0+y1)/2;	
+
+	//Affichage nom
+	//Si la chaine entière peut entrer orizontalement ou verticalement dans le rectangle
+	if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
+	    //Si la chaine peut entrer verticalement seulement
+	    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
+		r = 1.57; //rotation de 90° (en radians)
+		
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+	    labelsList[name] = label;
+	}	
+	
+	//Autrement : separation de la chaîne de charactères
 	else {
-		name = elem.name;	
-		var r = 0; //rotation du label, par defaut la disposition est orizontale
-		var rectCenterX = (x0+x1)/2;
-	    var rectCenterY = (y0+y1)/2;	
+	    var tmp = name.split(" ");
+	    for (var i=0; i<tmp.length; i++)
+		    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
+			//Si la chaine separée n'entre pas, on ne mets pas le label
+			return;
+	    for (var i=0; i<tmp.length; i++){
+		var word = tmp[i];
 		
-		//Si la chaine entière peut se entrer orizontalement ou verticalement dans le rectangle
-		if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
-			//Si la chaine peut entrer verticalement seulement
-			if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
-				r = 1.57; //rotation de 90° (en radians)
-			
-			label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-			labelsList[name] = label;
-		}	
-		
-		//Autrement : separation de la chaîne de charactères
-		else {
-			var tmp = name.split(" ");
-			for (var i=0; i<tmp.length; i++)
-				if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
-					//Si la chaine separée n'entre pas, on ne mets pas le label
-					return;
-			for (var i=0; i<tmp.length; i++){
-				var word = tmp[i];
-				label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r); 
-				labelsList[word] = label;
-			}
-		}	
-	}   
+		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
+		word = word+i;
+		labelsList[word] = label;
+	    }
+	}
+	
+	//affichage informations supplementaires pour le rectangle choisi
+	if (m != undefined && (x1 > m.x()) && (m.x()> x0) && (y1> m.y()) &&(m.y() > y0)){
+	    /*console.log("xO, x1 "+x0+" "+x1);
+	      console.log("yO, y1 "+y0+" "+y1);
+	      console.log("cliqué");*/
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
+	    labelsList[elem.term] = label;
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
+	    labelsList[elem.ICnuno] = label;
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
+	    labelsList[elem.ICzhou] = label;
+	}
+    }   
 }
 
 
@@ -209,30 +229,31 @@ function clearLabels(){
 	}
 }
 
-function updateMarks() {
-	clearLabels();
-	tmap(data, 1, - 8, - 4.75, - 3, 2.5, true);
+function updateMarks(m) {
+    clearLabels();
+    //elem, depth, x0, y0, x1, y1, s
+    tmap(data, 1, - 8, -4.75, -3, 2.5, true, m);
 }
 
 
 var treeInteractor = function (e) {
-  var rect = canvas.getBoundingClientRect();  
-  var pickX = e.clientX - rect.left;
-  //console.log("canvas top, bottom, left, right "+rect.top+" "+rect.bottom+" "+ rect.left+" "+rect.right);
-  //var pickY = canvas.height - e.clientY + rect.top;
-  var pickY = e.clientY - rect.top;
-  //console.log("x, y choisis "+e.clientX+" "+e.clientY);
-  //console.log(pickX+" "+pickY);
-  var m = window.fatum.pick(pickX, pickY);
-  if(!m) return;
-  changeSize(data, 1); // s * k = G / 2
-  recSum(data);
-  changeColor(data, true);
-  changeColor(markRev[m.id()], false);
-  changeSize(markRev[m.id()], data.size / (markRev[m.id()].size * 2));
-  recSum(data);
-  updateMarks();
-  window.fatum.animate(500);
+    var rect = canvas.getBoundingClientRect();  
+    //e.clientX : où on clique par rapport à la page html
+    //pickX : où on clique par rapport au canvas
+    var pickX = e.clientX - rect.left;
+    //console.log("canvas top, bottom, left, right "+rect.top+" "+rect.bottom+" "+ rect.left+" "+rect.right);
+    var pickY = e.clientY - rect.top;
+    var m = window.fatum.pick(pickX, pickY);  //mark choisi
+    if(!m) return;
+    changeSize(data, 1); // s * k = G / 2
+    recSum(data);
+    changeColor(data, true);
+    changeColor(markRev[m.id()], false);
+    changeSize(markRev[m.id()], data.size / (markRev[m.id()].size * 2));
+    recSum(data);
+    updateMarks(m);
+    window.fatum.animate(500);
+
 }
 
 var initVis = function () {
