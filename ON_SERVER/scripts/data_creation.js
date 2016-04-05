@@ -106,6 +106,7 @@ var convert_to_treemap_format = function(clusters_obj)
   var children_obj = parser("./ON_SERVER/JSON_files/children.json");
   var descendant_obj = parser("./ON_SERVER/JSON_files/descendants.json");
   var parent_obj = parser("./ON_SERVER/JSON_files/parents.json");
+  var gene_obj = parser("./ON_SERVER/JSON_files/gene_bis.json");
   var info_obj = parser("./ON_SERVER/JSON_files/info_sur_term_.json");
 */
 
@@ -114,6 +115,7 @@ var convert_to_treemap_format = function(clusters_obj)
   var children_obj = parser("./ON_SERVER/JSON_simple_samples/children_bis.json");
   var descendant_obj = parser("./ON_SERVER/JSON_simple_samples/descendants_bis.json");
   var parent_obj = parser("./ON_SERVER/JSON_simple_samples/parents_bis.json");
+  var gene_obj = parser("./ON_SERVER/JSON_simple_samples/gene_bis.json");
   var info_obj = parser("./ON_SERVER/JSON_simple_samples/info_sur_term_bis.json");
 
   for(var cluster_nb in clusters_obj) // cluster_nb contains "cluster_1", "cluster_2"...
@@ -136,14 +138,23 @@ var convert_to_treemap_format = function(clusters_obj)
        
         if(term != "")
         {
+          
+          var id = info_obj[term].ID;
+
+          var child_list = children_obj[id];
+          var parents_list = parent_obj[id];
+          var gene_list = gene_obj[id];
 
           var tmp_info_obj  =  { 
                                       "name" : term,
                                       "size" : 3,
-                                      "term" : info_obj[term].ID,
+                                      "term" : id,
                                       "ICnuno" : info_obj[term].ICNuno,
                                       "ICzhou" : info_obj[term].ICZhou,
-                                      "depth" : info_obj[term].depth
+                                      "depth" : info_obj[term].depth,
+                                      "parents" : parents_list,
+                                      "term_children" : child_list,
+                                      "gene" : gene_list
                                 };
 
           tmp_terms_list.push(tmp_info_obj);
