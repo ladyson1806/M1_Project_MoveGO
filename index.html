@@ -6,7 +6,8 @@
 	
 	<meta charset="utf-8"></meta>
 		
-	<meta name="author" content ="Baba BARO - Savandara BESSE - Kristina KASTANO - Alexia SOUVANE"></meta>
+	<meta name="author" content ="Baba BARO - Savandara BESSE 
+								- Kristina KASTANO- Alexia SOUVANE"></meta>
 		
 	<title>Homepage - ANNOT-GENES</title>
 	
@@ -25,7 +26,6 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#Home">Home</a></li>
                     <li><a href="#Overview">Overview</a></li>
-                    <li><a href="#Visualisation">Visualisation</a></li>
                     <li><a href="#Sources">Sources</a></li>
                     <li><a href="#Contact">Contact</a></li>
                 </ul>
@@ -59,25 +59,42 @@ Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam mediocre 
 
 		</section>
 		
-		<section class ="upload">
+		<section>
 		
+		<div id ="upload">
 		
 			<form 	id        =  "uploadForm"
 			     	enctype   =  "multipart/form-data"
      				action    =  "/treemap_vis"
-     				method    =  "post"
-			>
+     				method    =  "post">
 			
-			<p> 
+			<p align = center>
 			<br>
-			ADD YOUR FILE .CSV HERE :<br>
+				ADD YOUR FILE .CSV HERE :<br>
 			<br>
-				<input type="FILE" value="Browse..." name="file_name" align="center">
+				<input type="file" value="Browse..." name="file_name" align="center">
+			<br><br>
 			</p>
+			
+			<div align="center" class="bouton">
+				<input type="button" value="Add another file..." onclick="howMany_Files()"/>
+			</div>
+		</div>
+		
+		<div id="upload_plus_one">
+		
+		</div>
+		
+		<div id="upload_plus_two">
+		
+		</div>
+		
+		<div id="upload_plus_three">
+		
+		</div>
 
-			
-			
 		</section>
+		
 		
 		<section class ="filters">
 		
@@ -107,7 +124,7 @@ Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam mediocre 
 		<INPUT type="submit" value="Run Visualisation" name="Run Visualisation"></p>
 		
 		</section>
-		
+
 		</form>
 
 
