@@ -42,6 +42,7 @@ function hsvToRgb(h, s, v) {
         mod = i % 6,
         r = [v, q, p, p, t, v][mod],
         g = [t, v, v, q, p, p][mod],
+
         b = [p, p, t, v, v, q][mod];
 
     return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) , 255];
@@ -179,9 +180,38 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	var rectCenterX = (x0+x1)/2;
 	var rectCenterY = (y0+y1)/2;	
 
-	//Affichage nom
+	//affichage d'informations supplementaires pour le rectangle choisi
+	if (m != undefined && (x1 > m.x()) && (m.x()> x0) && (y1> m.y()) &&(m.y() > y0)){
+	    /*console.log("xO, x1 "+x0+" "+x1);
+	      console.log("yO, y1 "+y0+" "+y1);
+	      console.log("cliqué");*/
+	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre orizontalement
+		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+		labelsList[name] = label;
+	    }
+	    else { //autrement séparation en mots
+		var tmp = name.split(" ");
+		for (var i=0; i<tmp.length; i++){
+		    var word = tmp[i];
+		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
+		    word = name+word;
+		    labelsList[word] = label;
+		}
+	    }
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
+	    labelsList[elem.term] = label;
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
+	    labelsList[elem.ICnuno+name] = label;
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
+	    labelsList[elem.ICzhou+name] = label;
+	    console.log("nom "+name);
+	    console.log("Icnuno "+elem.ICnuno);
+	    return;
+	}
+	
+	//Affichage nom pour le reste de rectangles
 	//Si la chaine entière peut entrer orizontalement ou verticalement dans le rectangle
-	if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
+	else if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
 	    //Si la chaine peut entrer verticalement seulement
 	    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
 		r = 1.57; //rotation de 90° (en radians)
@@ -201,22 +231,9 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 		var word = tmp[i];
 		
 		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		word = word+i;
+		word = name+word;
 		labelsList[word] = label;
 	    }
-	}
-	
-	//affichage informations supplementaires pour le rectangle choisi
-	if (m != undefined && (x1 > m.x()) && (m.x()> x0) && (y1> m.y()) &&(m.y() > y0)){
-	    /*console.log("xO, x1 "+x0+" "+x1);
-	      console.log("yO, y1 "+y0+" "+y1);
-	      console.log("cliqué");*/
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
-	    labelsList[elem.term] = label;
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
-	    labelsList[elem.ICnuno] = label;
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
-	    labelsList[elem.ICzhou] = label;
 	}
     }   
 }
