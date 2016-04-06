@@ -14,6 +14,7 @@ var express = require("express");   // to create web server
 var path    = require("path");      // to send html file to front-end
 var multer  = require('multer');    // to upload file
 var fs      = require("fs");        // to read/write in file
+var archiver= require("archiver");  // to dowload .zip
 var script  = require('./ON_SERVER/scripts/data_creation.js'); // Our own module with our scripts
 
 
@@ -61,7 +62,37 @@ We can access all these data through "req.files.size" for example
 // Root page
 app.use(express.static(__dirname+"/public/index"));
 app.use('/treemap_vis', express.static(__dirname+"/public/visualisation"));
+app.get('/export', function(req,res){
 
+
+    // Helped with https://www.npmjs.com/package/archiver
+
+    var archive = archiver('zip');
+
+
+    archive.on('error', function(err) {
+        res.status(500).send({error: err.message});
+    });
+
+    //on stream closed we can end the request
+    res.on('close', function() {
+        console.log('Archive wrote %d bytes', archive.pointer());
+        return res.status(200).send('OK').end();
+    });
+    //set the archive name
+    res.attachment('treemap_visualisation.zip');
+    //this is the streaming magic
+    archive.pipe(res);
+    archive.append(fs.createReadStream('public/visualisation/data.js'), {name:'treemap_visualisation/data.js'});
+    archive.append(fs.createReadStream('public/visualisation/fatum.data'), {name:'treemap_visualisation/fatum.data'});
+    archive.append(fs.createReadStream('public/visualisation/fatum.js'), {name:'treemap_visualisation/fatum.js'});
+    archive.append(fs.createReadStream('public/visualisation/fatum.js.mem'), {name:'treemap_visualisation/fatum.js.mem'});
+    archive.append(fs.createReadStream('public/visualisation/index.html'), {name:'treemap_visualisation/index.html'});
+    archive.append(fs.createReadStream('public/visualisation/tree_visu.js'), {name:'treemap_visualisation/tree_visu.js'});
+    //you can add a directory using directory function
+    //archive.directory(dirPath, false);
+    archive.finalize();
+});
 
 
 
