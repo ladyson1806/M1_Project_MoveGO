@@ -18,11 +18,8 @@ var archiver= require("archiver");  // to dowload .zip
 var script  = require('./ON_SERVER/scripts/data_creation.js'); // Our own module with our scripts
 
 
-
-
-// Instanciate an object express named "app"
+// Instanciate an object express named "app" 
 var app = express(); 
-
 
 
 /*
@@ -59,8 +56,8 @@ We can access all these data through "req.files.size" for example
 */
 
 
-// Root page
-app.use(express.static(__dirname+"/public/index"));
+// Routage
+app.use('/', express.static(__dirname+"/public/index"));
 app.use('/treemap_vis', express.static(__dirname+"/public/visualisation"));
 app.get('/export', function(req,res){
 
@@ -79,6 +76,7 @@ app.get('/export', function(req,res){
         console.log('Archive wrote %d bytes', archive.pointer());
         return res.status(200).send('OK').end();
     });
+    
     //set the archive name
     res.attachment('treemap_visualisation.zip');
     //this is the streaming magic
@@ -98,7 +96,7 @@ app.get('/export', function(req,res){
 
 
 // After submission, file is uploaded (return an error if file not well uploaded)
-// and execute file conversion. Then launch treemap visualisation with the converted file
+// and execute file conversion. Then launch treemap visualisation with the converted file.
 app.post('/',function(req,res,next){
     upload(req,res,function(err) {
         if(err) {
@@ -112,6 +110,7 @@ app.post('/',function(req,res,next){
 
       // Transform the JS object containing clusters into a JS objects containing all information
       var data = script.convert_to_treemap_format(tmp_obj);
+      // Write data onto file (to be reused by FATUM)
       script.write('var data = '+JSON.stringify(data), 'public/visualisation/data.js');
 
       res.redirect('/treemap_vis');
