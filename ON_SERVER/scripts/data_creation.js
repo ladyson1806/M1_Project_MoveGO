@@ -145,10 +145,11 @@ var convert_to_treemap_format = function(clusters_obj)
           var child_list = children_obj[id];
           var parents_list = parent_obj[id];
           var gene_list = gene_obj[id];
+          if (gene_list == undefined ) { gene_list = []; }
 
           var tmp_info_obj  =  { 
                                       "name" : term,
-                                      "size" : 3,
+                                      "size" : gene_list.size,
                                       "term" : id,
                                       "ICnuno" : info_obj[term].ICNuno,
                                       "ICzhou" : info_obj[term].ICZhou,
