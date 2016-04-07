@@ -161,8 +161,6 @@ var convert_to_treemap_format = function(clusters_obj)
 
           tmp_terms_list.push(tmp_info_obj);
 
-        // RAJOUTER PARENT/DESCENDANT !!!
-
         } // end if
 
       } // end for (term name)
