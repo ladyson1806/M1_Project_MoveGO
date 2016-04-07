@@ -87,8 +87,9 @@ app.get('/export', function(req,res){
     archive.append(fs.createReadStream('public/visualisation/fatum.data'), {name:'treemap_visualisation/fatum.data'});
     archive.append(fs.createReadStream('public/visualisation/fatum.js'), {name:'treemap_visualisation/fatum.js'});
     archive.append(fs.createReadStream('public/visualisation/fatum.js.mem'), {name:'treemap_visualisation/fatum.js.mem'});
-    archive.append(fs.createReadStream('public/visualisation/index.html'), {name:'treemap_visualisation/index.html'});
+    archive.append(fs.createReadStream('public/visualisation/index.html'), {name:'treemap_visualisation/visualisation.html'});
     archive.append(fs.createReadStream('public/visualisation/tree_visu.js'), {name:'treemap_visualisation/tree_visu.js'});
+    archive.append(fs.createReadStream('public/visualisation/index.css'), {name:'treemap_visualisation/index.css'});
     //you can add a directory using directory function
     //archive.directory(dirPath, false);
     archive.finalize();
