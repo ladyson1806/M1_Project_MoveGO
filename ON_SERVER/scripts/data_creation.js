@@ -149,7 +149,7 @@ var convert_to_treemap_format = function(clusters_obj)
 
           var tmp_info_obj  =  { 
                                       "name" : term,
-                                      "size" : gene_list.lenght,
+                                      "size" : gene_list.length,
                                       "term" : id,
                                       "ICnuno" : info_obj[term].ICNuno,
                                       "ICzhou" : info_obj[term].ICZhou,
