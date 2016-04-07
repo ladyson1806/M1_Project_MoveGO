@@ -101,22 +101,23 @@ var convert_to_treemap_format = function(clusters_obj)
                   
 
 
-/*
+
   var ancestor_obj = parser("./ON_SERVER/JSON_files/ancestor.json");
   var children_obj = parser("./ON_SERVER/JSON_files/children.json");
   var descendant_obj = parser("./ON_SERVER/JSON_files/descendants.json");
   var parent_obj = parser("./ON_SERVER/JSON_files/parents.json");
-  var gene_obj = parser("./ON_SERVER/JSON_files/gene_bis.json");
+  var gene_obj = parser("./ON_SERVER/JSON_files/gene.json");
   var info_obj = parser("./ON_SERVER/JSON_files/info_sur_term_.json");
-*/
 
 
+/*
   var ancestor_obj = parser("./ON_SERVER/JSON_simple_samples/ancestor_bis.json");
   var children_obj = parser("./ON_SERVER/JSON_simple_samples/children_bis.json");
   var descendant_obj = parser("./ON_SERVER/JSON_simple_samples/descendants_bis.json");
   var parent_obj = parser("./ON_SERVER/JSON_simple_samples/parents_bis.json");
   var gene_obj = parser("./ON_SERVER/JSON_simple_samples/gene_bis.json");
   var info_obj = parser("./ON_SERVER/JSON_simple_samples/info_sur_term_bis.json");
+*/
 
   for(var cluster_nb in clusters_obj) // cluster_nb contains "cluster_1", "cluster_2"...
   {
