@@ -22,14 +22,18 @@ To a json object structured like this:
 var objecting_csv = function (file_path) 
 {
 
+  var to_return = [];
+
   var file_content = fs.readFileSync(file_path, "UTF-8");
 
   var lines = file_content.split("\n"); // Obtaining lines = [line1 , line2 , ... , linen]
   var result = {};
 
+  var i = 0;
 
-  for (var i = 0 ; i < lines.length ; i++)
+  while(lines[i] != "")
   {
+
     var currentline = lines[i].split(";"); // Obtaining currentline = [GO1 , GO2 , ... , GOn ]
     var associated_GO = [] ;
 
@@ -39,9 +43,31 @@ var objecting_csv = function (file_path)
     }
 
     result[ [currentline[0]] ] = associated_GO ;
+    i++;
+  }
+
+  to_return.push(result);
+
+  var result = {};
+
+  for (var j = i+1 ; j < lines.length ; j++)
+  {
+    var currentline = lines[j].split(";"); // Obtaining currentline = [GO1 , GO2 , ... , GOn ]
+    var associated_GO = [] ;
+
+    for (var k = 1 ; k < currentline.length ; k++ )
+    {
+      associated_GO.push(currentline[k]) ;
+    }
+
+    result[ [currentline[0]] ] = associated_GO ;
 
   }
-return result // Return the object obtain from the csv file 
+
+  to_return.push(result);
+
+
+return to_return // Return the object obtain from the csv file 
 }
 
 
@@ -66,7 +92,7 @@ var parser = function(file_path)
 
 
 
-var convert_to_treemap_format = function(clusters_obj)
+var convert_to_treemap_format = function(clusters_obj,gene_obj)
 {
 
   /*
@@ -106,8 +132,7 @@ var convert_to_treemap_format = function(clusters_obj)
   var children_obj = parser("./ON_SERVER/JSON_files/children.json");
   var descendant_obj = parser("./ON_SERVER/JSON_files/descendants.json");
   var parent_obj = parser("./ON_SERVER/JSON_files/parents.json");
-  var gene_obj = parser("./ON_SERVER/JSON_files/gene.json");
-  var info_obj = parser("./ON_SERVER/JSON_files/info_sur_term_.json");
+  var info_obj = parser("./ON_SERVER/JSON_files/info_sur_term.json");
 
 
 /*
@@ -139,9 +164,8 @@ var convert_to_treemap_format = function(clusters_obj)
        
         if(term != "")
         {
-          
-          var id = info_obj[term].ID;
 
+          var id = info_obj[term].ID;
           var child_list = children_obj[id];
           var parents_list = parent_obj[id];
           var gene_list = gene_obj[id];
