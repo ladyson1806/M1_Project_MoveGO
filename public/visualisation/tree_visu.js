@@ -2,8 +2,9 @@
 * Treemap visualisation of the GO data included in data.js
 * Original source : 
 * http://www.labri.fr/perso/aperrot/fatum/treedemo/index.html
-* Original author : Alexandre Aperrot
+* Original author : Alexandre Perrot
 * Modifications by : Kristina Kastano
+* Last version : 08/04/2016
 *********************************************************/
 
 var markRev = {};
@@ -173,7 +174,7 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 		y1 = y0 + elem.children[i].size * dalpha;
 	    else
 		x1 = x0 + elem.children[i].size * dalpha;
-	    
+	   
 	    tmap(elem.children[i], depth + 1, x0, y0, x1, y1, !s, m); 
 	    if (s)
 		y0 = y1;
@@ -182,19 +183,16 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	}
     }
     //Pas d'enfants, affichage
-    else {
-	
+    else {	
 	name = elem.name;	
 	var r = 0; //rotation du label, par defaut la disposition est orizontale
 	var rectCenterX = (x0+x1)/2;
 	var rectCenterY = (y0+y1)/2;	
 
 	//affichage d'informations supplementaires pour le rectangle choisi
-	if ((m != undefined ) && (x1 > m.x()) && (m.x()> x0) && (y1> m.y()) &&(m.y() > y0) ){
-	    /*console.log("xO, x1 "+x0+" "+x1);
-	      console.log("yO, y1 "+y0+" "+y1);
-	      console.log("cliqué");*/
-		if (w >= (name.length*T_SIZE/2)){ //si le nom entre orizontalement
+	if ((m != undefined ) && ( elem.markt == m )){
+	    console.log(elem.name);
+	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre orizontalement
 		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
 			labelList.push(label);
 		}
@@ -217,7 +215,7 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	
 	//Affichage nom pour le reste de rectangles
 	//Si la chaine entière peut entrer orizontalement ou verticalement dans le rectangle
-	else if (w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2) ){
+	else if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
 	    //Si la chaine peut entrer verticalement seulement
 	    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
 		r = 1.57; //rotation de 90° (en radians)
@@ -245,8 +243,9 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 
 
 function clearLabels(){
-	for (var i in labelList){
-		labelList[i].textColor(0,0,0,0);
+    for (var i in labelList){
+	    fatum.deleteText(labelList[i]);
+	    //labelList[i].textColor(0,0,0,0);
 	}
 }
 
