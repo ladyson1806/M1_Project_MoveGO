@@ -2,7 +2,7 @@
 * Treemap visualisation of the GO data included in data.js
 * Original source : 
 * http://www.labri.fr/perso/aperrot/fatum/treedemo/index.html
-* Original author : Alexandre Perrot
+* Original author : David Auber
 * Modifications by : Kristina Kastano
 * Last version : 08/04/2016
 *********************************************************/
