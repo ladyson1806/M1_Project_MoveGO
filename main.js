@@ -104,12 +104,14 @@ app.post('/',function(req,res,next){
         }
     
       // Convert csv file into JS objet
-      var tmp_obj = script.objecting_csv(req.file.path);
+      var result = script.objecting_csv(req.file.path);
+      var tmp_clust_obj = result[0];
+      var tmp_gene_obj = result[1];     
       //script.write(JSON.stringify(tmp_obj), req.file.fieldname+'.json');
 
 
       // Transform the JS object containing clusters into a JS objects containing all information
-      var data = script.convert_to_treemap_format(tmp_obj);
+      var data = script.convert_to_treemap_format(tmp_clust_obj,tmp_gene_obj);
       // Write data onto file (to be reused by FATUM)
       script.write('var data = '+JSON.stringify(data), 'public/visualisation/data.js');
 
