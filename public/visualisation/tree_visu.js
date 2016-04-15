@@ -10,8 +10,7 @@
 var markRev = {};
 var canvas = document.getElementById('fatum-demo');
 labelList= new Array;
-labelsList={};
-T_SIZE = 0.2; //taille du texte des labels
+T_SIZE = 0.28; //taille du texte des labels
 
 function rgbToHsv(r, g, b) {
     r /= 255;
@@ -59,16 +58,17 @@ function hsvToRgb(h, s, v) {
 }
 
 function accept(elem, leaf, intern, parent, depth) {
-  if (depth == undefined)
-    depth = 0;
-  if (elem.children != undefined) {
-    if (intern != undefined) intern(elem, parent, depth);
-    for (var i in elem.children)
-    accept(elem.children[i], leaf, intern, elem, depth + 1);
-  }
-  else {
-   leaf(elem, parent, depth);
-  }
+    //fonction utilisée dans changeSize et changeColor
+    if (depth == undefined)
+	depth = 0;
+    if (elem.children != undefined) {
+	if (intern != undefined) intern(elem, parent, depth);
+	for (var i in elem.children)
+	    accept(elem.children[i], leaf, intern, elem, depth + 1);
+    }
+    else {
+	leaf(elem, parent, depth);
+    }
 }
 
 function changeSize(elem, k) {
@@ -77,46 +77,51 @@ function changeSize(elem, k) {
   });
 }
 
-
 var hstatic = 0;
 function changeColor(elem, grey) {
-  var f = function () {
-  };
-  if (grey) {
-    f = function (elem) {
-      var c = elem.color;
-      var y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
-      elem.markt.color(y, y, y, 255);
+    var f = function () {};
+    if (grey) {
+	f = function (elem) {
+	    var c = elem.color;
+	    var y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+	    elem.markt.color(y, y, y, 255);
+	}
     }
-  }
-  else {
-    f = function (elem, parent, depth) {
-      if (elem.color == undefined) {
-        if (parent == undefined )
-          elem.color = [100,100,100,255];
-        else {
-          var col = parent.color;
-          var hsv = rgbToHsv(col[0], col[1], col[2]);
-          hsv[1] = 100/(depth+1);
-          hsv[2] = 100;
-          if (parent.hstatic == undefined)
-            parent.hstatic = 0;
-          if (parent.hstatic > 360)
-            parent.hstatic = 0;
-            hsv[0] = parent.hstatic;
-            parent.hstatic += 360/ parent.children.length;
+    else {
+	f = function (elem, parent, depth) {
+	    if (elem.color == undefined) {
+		if (parent == undefined )
+		    elem.color = [100,100,100,255];
+		else {
+		    var col = parent.color;
+		    var hsv = rgbToHsv(col[0], col[1], col[2]);
+		    hsv[1] = 70/(depth+1);
+		    hsv[2] = 100;
+		    if (parent.hstatic == undefined)
+			parent.hstatic = 0;
+		    if (parent.hstatic > 360)
+			parent.hstatic = 0;
+		    hsv[0] = parent.hstatic;
+		    parent.hstatic += 360/ parent.children.length;
+		    
+		    hsv[0] = Math.max(hsv[0], 0);
+		    hsv[0] = Math.min(hsv[0], 360);
+		    elem.color= hsvToRgb(hsv[0], hsv[1], hsv[2]);
+		}
+	    }
+	    if (elem.markt != undefined) {
+		elem.markt.color(elem.color);
+	    }
+	};
+    }
+    accept(elem, f, f, undefined);
+}
 
-          hsv[0] = Math.max(hsv[0], 0);
-          hsv[0] = Math.min(hsv[0], 360);
-          elem.color= hsvToRgb(hsv[0], hsv[1], hsv[2]);
-        }
-      }
-      if (elem.markt != undefined) {
-        elem.markt.color(elem.color);
-      }
-    };
-  }
-  accept(elem, f, f, undefined);
+function colorRelatives(elem){
+    f = function(elem){
+	
+    }
+    accept(elem, f, f, undefined);
 }
 
 function recSum(elem) {
@@ -188,40 +193,46 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	var r = 0; //rotation du label, par defaut la disposition est orizontale
 	var rectCenterX = (x0+x1)/2;
 	var rectCenterY = (y0+y1)/2;	
-
+	
 	//affichage d'informations supplementaires pour le rectangle choisi
-	if ((m != undefined ) && ( elem.markt == m )){
+	if ((m != undefined ) && ( elem.markt.id() == m.id())){
 	    console.log(elem.name);
-	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre orizontalement
-		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-			labelList.push(label);
+	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre horizontalement
+		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+		    .text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+		labelList.push(label);
+	    }
+	    else { //autrement séparation en mots
+		var tmp = name.split(" ");
+		for (var i=0; i<tmp.length; i++){
+		    var word = tmp[i];
+		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+			.text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
+		    labelList.push(label);
 		}
-		else { //autrement séparation en mots
-		    var tmp = name.split(" ");
-		    for (var i=0; i<tmp.length; i++){
-			var word = tmp[i];
-			label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-			labelList.push(label);
-		    }
-		}
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
-		labelList.push(label);
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
-		labelList.push(label);
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
-		labelList.push(label);
+	    }
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(elem.term)
+		.x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
+	    labelList.push(label);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+		.text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
+	    labelList.push(label);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+		.text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
+	    labelList.push(label);
 		return;
 	    }
 	
 	//Affichage nom pour le reste de rectangles
-	//Si la chaine entière peut entrer orizontalement ou verticalement dans le rectangle
+	//Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
 	else if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
 	    //Si la chaine peut entrer verticalement seulement
 	    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
 		r = 1.57; //rotation de 90° (en radians)
 		
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-		labelList.push(label);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name)
+		.x(rectCenterX).y(rectCenterY).rotation(r); 
+	    labelList.push(label);
 	}	
 	
 	//Autrement : separation de la chaîne de charactères
@@ -234,7 +245,8 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	    for (var i=0; i<tmp.length; i++){
 		var word = tmp[i];
 		
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
+		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).
+		    x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
 		labelList.push(label);
 	    }
 	}
@@ -243,28 +255,22 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 
 
 function clearLabels(){
-    for (var i in labelList){
+    for (var i in labelList)
 	    fatum.deleteText(labelList[i]);
-	    //labelList[i].textColor(0,0,0,0);
-	}
 }
 
 function updateMarks(m) {
     clearLabels();
     //elem, depth, x0, y0, x1, y1, s
-    tmap(data, 1, - 8, -4.75, -3, 2.5, true, m);
+    tmap(data, 1, - 20, -10, 13, 8, false, m);
 }
 
 
 var treeInteractor = function (e) {
     var rect = canvas.getBoundingClientRect();  
-    //e.clientX : où on clique par rapport à la page html
-    //pickX : où on clique par rapport au canvas
     var pickX = e.clientX - rect.left;
-    //console.log("canvas top, bottom, left, right "+rect.top+" "+rect.bottom+" "+ rect.left+" "+rect.right);
-    var pickY = e.clientY - rect.top;
-    //var pickY = canvas.height - e.clientY + rect.top;
-    var m = window.fatum.pick(pickX, pickY);  //mark choisi
+    var pickY = e.clientY - rect.top; //modifié
+    var m = window.fatum.pick(pickX, pickY);  
     if(!m) return;
     changeSize(data, 1); // s * k = G / 2
     recSum(data);
