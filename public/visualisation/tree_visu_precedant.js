@@ -117,6 +117,24 @@ function changeColor(elem, grey) {
     accept(elem, f, f, undefined);
 }
 
+function colorRelatives(elem, chosenMark){
+    //on a le chosen mark et pas le chosen elem de la structure de données :(
+    /*if (elem.children != undefined) 
+	for (var i in elem.children){
+	    colorRelatives(elem.children[i], chosenElem);
+	}
+  
+    else{ 
+	for (var j in chosenElem.term_children)
+	    if ( chosenElem.term_children[j] === elem.term ){
+		elem.markt.color(255, 51, 51);
+		console.log("mark à colorer !!");
+	    }
+	//for (var j in chosenElem.parents)	    
+    }
+    */
+}
+
 function recSum(elem) {
   var sum = 0;
   if (elem.children != undefined)
@@ -131,7 +149,6 @@ function recSum(elem) {
 }
 
 
-
 var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     if (elem.markt == undefined) {
 	elem.markt = window.fatum.addMark();
@@ -141,10 +158,6 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	elem.markt.shape(Fatum.Shape.SQUARE);
 	elem.markt.borderColor(0, 0, 0, 255);
 	elem.markt.borderWidth(1);
-    }
-    if (m != undefined && elem.name == 'data'){
-	findChosenElem(elem, m);
-	console.log(m.chosenElem);
     }
     var w = (x1 - x0);
     var h = (y1 - y0);
@@ -188,45 +201,10 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     //Pas d'enfants, affichage
     else {
 	createLabel(elem, m, y0, y1, w, h);
-	if (m != undefined){
-	    console.log("commencé à chercher enfants/parents...");
-	    for (var i in m.chosenElem.term_children){
-		if ( m.chosenElem.term_children[j] === elem.term ){
-		    elem.markt.color(255, 51, 51);
-		    console.log("mark à colorer en rouge");
-		}
-	    }
-	    for (var j in m.chosenElem.parents){
-		if ( m.chosenElem.parents[j] === elem.term ){
-		    elem.markt.color(51, 153, 255);
-		    console.log("mark à colorer en bleue");
-		}
-	    }
-	    console.log("fini !");
-	}   
-    }
-}
-
-function findChosenElem(elem, m){
-    //Pas prévu pour quand on a cliqué sur un cluster
-    if (elem.children != undefined)
-	for (var i in elem.children){
-	    findChosenElem(elem.children[i], m);
-	}
-    else
-	if ( elem.markt.id() == m.id() ){
-	    console.log("Trouvé ! "+ elem.term);
-	    //return elem.term; //pourquoi il retourne undefined ???
-	    m.chosenElem = elem.term; //pourquoi undefined ???
-	}
-}
-
-function colorRelatives(elem, chosenMark){
-    //pour mettre le code relatif, pour l'instant le code est dans tmap
+    }   
 }
 
 function createLabel(elem, m, y0, y1, w, h){
-    //creation d'un label (texte) pour chaque term
     	name = elem.name;	
 	var r = 0; //rotation du label, par defaut la disposition est orizontale
 	var rectCenterX = elem.markt.x()
@@ -234,6 +212,7 @@ function createLabel(elem, m, y0, y1, w, h){
 	
 	//affichage d'informations supplementaires pour le rectangle choisi
 	if ((m != undefined ) && ( elem.markt.id() == m.id())){
+	    console.log(elem.name);
 	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre horizontalement
 		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
 		    .text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
