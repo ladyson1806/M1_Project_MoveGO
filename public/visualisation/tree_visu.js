@@ -143,7 +143,8 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 	elem.markt.borderWidth(1);
     }
     if (m != undefined && elem.name == 'data'){
-	findChosenElem(elem, m);
+	//détection du terme choisi
+	findChosenTerm(elem, m);
     }
     var w = (x1 - x0);
     var h = (y1 - y0);
@@ -185,38 +186,39 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     //Pas d'enfants, affichage du label et coloration enfants/parents
     else {
 	createLabel(elem, m, y0, y1, w, h);
-	if (m != undefined && m.chosenElem != undefined){
-	    //m.chosenElem est undefined quand on a cliqué sur un cluster ou data
-	    for (var i in elem.term_children){
-		if ( elem.term_children[i] == m.chosenElem ){ 
-		    elem.markt.color(255, 51, 51); //rouge
-		}
-	    }
-	    for (var j in m.chosenElem.parents){
-		if ( elem.parents[j] == m.chosenElem ){ 
-		    elem.markt.color(51, 153, 255); //bleue
-		}
-	    }
-	}   
+	colorRelatives(elem, m);
     }
 }
 
-function findChosenElem(elem, m){
+function findChosenTerm(elem, m){
     /* Ajoute comme attribut de m le code du terme choisi */
     /* Si on a cliqué sur un cluster ou data, il ajoute rien */
     if (elem.children != undefined && m.id() != elem.markt.id())
 	for (var i in elem.children){
-	    findChosenElem(elem.children[i], m);
+	    findChosenTerm(elem.children[i], m);
 	}
     else
 	if ( elem.markt.id() == m.id() ){
 	    //console.log("Trouvé ! "+ elem.term);
-	    m.chosenElem = elem.term; 
+	    m.term = elem.term; 
 	}
 }
 
-function colorRelatives(elem, chosenMark){
-    //pour mettre le code relatif, pour l'instant le code est dans tmap
+function colorRelatives(elem, m){
+    if (m != undefined && m.term != undefined){
+	//m.chosenElem est undefined quand on a cliqué sur un cluster ou data
+	
+	for (var i in elem.term_children){
+	    if ( elem.term_children[i] == m.term ){ 
+		elem.markt.color(255, 51, 51); //rouge
+	    }
+	}
+	for (var j in m.term.parents){
+	    if ( elem.parents[j] == m.term ){ 
+		elem.markt.color(51, 153, 255); //bleue
+	    }
+	}
+    }
 }
 
 function createLabel(elem, m, y0, y1, w, h){
