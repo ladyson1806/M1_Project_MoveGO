@@ -58,7 +58,6 @@ function hsvToRgb(h, s, v) {
 }
 
 function accept(elem, leaf, intern, parent, depth) {
-    //fonction utilisée dans changeSize et changeColor
     if (depth == undefined)
 	depth = 0;
     if (elem.children != undefined) {
@@ -72,7 +71,8 @@ function accept(elem, leaf, intern, parent, depth) {
 }
 
 function changeSize(elem, k) {
-  accept(elem, function (elem) {
+    accept(elem, function (elem) {
+	console.log(elem.origin);
     elem.size = elem.origin * k;
   });
 }
@@ -95,7 +95,7 @@ function changeColor(elem, grey) {
 		else {
 		    var col = parent.color;
 		    var hsv = rgbToHsv(col[0], col[1], col[2]);
-		    hsv[1] = 70/(depth+1);
+		    hsv[1] = 100/(depth+1);
 		    hsv[2] = 100;
 		    if (parent.hstatic == undefined)
 			parent.hstatic = 0;
@@ -205,6 +205,7 @@ function findChosenTerm(elem, m){
 }
 
 function colorRelatives(elem, m){
+    //Colore le terme elem si il est fils ou père du mark choisi m
     if (m != undefined && m.term != undefined){
 	//m.chosenElem est undefined quand on a cliqué sur un cluster ou data
 	
@@ -304,7 +305,7 @@ var treeInteractor = function (e) {
     var pickY = e.clientY - rect.top; //modifié
     var m = window.fatum.pick(pickX, pickY);  
     if(!m) return;
-    changeSize(data, 1); // s * k = G / 2
+    changeSize(data, 8); // s * k = G / 2
     recSum(data);
     changeColor(data, true);
     changeColor(markRev[m.id()], false);
