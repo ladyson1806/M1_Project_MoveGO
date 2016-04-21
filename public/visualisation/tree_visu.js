@@ -185,24 +185,24 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 		x0 = x1;
 	}
     }
-    //Pas d'enfants, affichage
+    //Pas d'enfants, affichage et coloration enfants/parents
     else {
 	createLabel(elem, m, y0, y1, w, h);
-	if (m != undefined){
-	    console.log("commencé à chercher enfants/parents...");
-	    for (var i in m.chosenElem.term_children){
-		if ( m.chosenElem.term_children[j] === elem.term ){
+	if (m != undefined && m.chosenElem != undefined){
+	    
+	    for (var i in elem.term_children){
+		if ( elem.term_children[i] == m.chosenElem ){ 
 		    elem.markt.color(255, 51, 51);
-		    console.log("mark à colorer en rouge");
+		    console.log(elem.term_children[i]+" "+m.chosenElem);
 		}
 	    }
 	    for (var j in m.chosenElem.parents){
-		if ( m.chosenElem.parents[j] === elem.term ){
+		if ( elem.parents[j] == m.chosenElem ){ //m.chosenElem
 		    elem.markt.color(51, 153, 255);
-		    console.log("mark à colorer en bleue");
+		    console.log(elem.term_children[i]+" "+m.chosenElem);
 		}
 	    }
-	    console.log("fini !");
+	    //console.log("fini !");
 	}   
     }
 }
@@ -216,8 +216,7 @@ function findChosenElem(elem, m){
     else
 	if ( elem.markt.id() == m.id() ){
 	    console.log("Trouvé ! "+ elem.term);
-	    //return elem.term; //pourquoi il retourne undefined ???
-	    m.chosenElem = elem.term; //pourquoi undefined ???
+	    m.chosenElem = elem.term; 
 	}
 }
 
@@ -311,7 +310,6 @@ var treeInteractor = function (e) {
     recSum(data);
     changeColor(data, true);
     changeColor(markRev[m.id()], false);
-    colorRelatives(data, m);
     changeSize(markRev[m.id()], data.size / (markRev[m.id()].size * 2));
     recSum(data);
     updateMarks(m);
