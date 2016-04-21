@@ -144,7 +144,6 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     }
     if (m != undefined && elem.name == 'data'){
 	findChosenElem(elem, m);
-	console.log(m.chosenElem);
     }
     var w = (x1 - x0);
     var h = (y1 - y0);
@@ -168,8 +167,6 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     else
 	dalpha = (x1 - x0) / elem.size;
 
-    var name;
-    var label;
     //Presence d'enfants, appel recursif à la fonction
     if (elem.children != undefined){
 	for (var i in elem.children) {
@@ -185,37 +182,35 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
 		x0 = x1;
 	}
     }
-    //Pas d'enfants, affichage et coloration enfants/parents
+    //Pas d'enfants, affichage du label et coloration enfants/parents
     else {
 	createLabel(elem, m, y0, y1, w, h);
 	if (m != undefined && m.chosenElem != undefined){
-	    
+	    //m.chosenElem est undefined quand on a cliqué sur un cluster ou data
 	    for (var i in elem.term_children){
 		if ( elem.term_children[i] == m.chosenElem ){ 
-		    elem.markt.color(255, 51, 51);
-		    console.log(elem.term_children[i]+" "+m.chosenElem);
+		    elem.markt.color(255, 51, 51); //rouge
 		}
 	    }
 	    for (var j in m.chosenElem.parents){
-		if ( elem.parents[j] == m.chosenElem ){ //m.chosenElem
-		    elem.markt.color(51, 153, 255);
-		    console.log(elem.term_children[i]+" "+m.chosenElem);
+		if ( elem.parents[j] == m.chosenElem ){ 
+		    elem.markt.color(51, 153, 255); //bleue
 		}
 	    }
-	    //console.log("fini !");
 	}   
     }
 }
 
 function findChosenElem(elem, m){
-    //Pas prévu pour quand on a cliqué sur un cluster
-    if (elem.children != undefined)
+    /* Ajoute comme attribut de m le code du terme choisi */
+    /* Si on a cliqué sur un cluster ou data, il ajoute rien */
+    if (elem.children != undefined && m.id() != elem.markt.id())
 	for (var i in elem.children){
 	    findChosenElem(elem.children[i], m);
 	}
     else
 	if ( elem.markt.id() == m.id() ){
-	    console.log("Trouvé ! "+ elem.term);
+	    //console.log("Trouvé ! "+ elem.term);
 	    m.chosenElem = elem.term; 
 	}
 }
@@ -226,7 +221,8 @@ function colorRelatives(elem, chosenMark){
 
 function createLabel(elem, m, y0, y1, w, h){
     //creation d'un label (texte) pour chaque term
-    	name = elem.name;	
+    var name = elem.name;
+    var label;
 	var r = 0; //rotation du label, par defaut la disposition est orizontale
 	var rectCenterX = elem.markt.x()
 	var rectCenterY = elem.markt.y();	
