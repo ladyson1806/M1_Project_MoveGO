@@ -21,5 +21,5 @@ npm install sur la console sous linux dans le répertoire des fichiers
     ...
     code-termn;gene1;gene2;..;genen;
 
--Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
--Chaque term GO est suivi par la liste de gènes annotés par lui.
+ - Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
+ - Chaque term GO est suivi par la liste de gènes annotés par lui.
