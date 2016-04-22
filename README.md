@@ -12,7 +12,7 @@ npm install sur la console sous linux dans le répertoire des fichiers
 
 - Structure du fichier à charger
  - Un exemple est le fichier ZhouMesureHuman.csv
- - Exemple généralisé : 
+ - Exemple généralisé 
     Cluster_1;nom-term1;nom-term2;nom-term3;...;nom-termn; 
     
     Cluster_n;term1;term2;...;nom-termn; 
