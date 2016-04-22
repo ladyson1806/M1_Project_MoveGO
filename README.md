@@ -11,8 +11,8 @@ npm install sur la console sous linux dans le répertoire des fichiers
 - Vous pouvez maintenant charger un fichier csv et avoir une jolie visualisation !
 
 - Structure du fichier à charger
-  fichier ZhouMesureHuman.csv
-  exemple généralisé : 
+ - Un exemple est le fichier ZhouMesureHuman.csv
+ - Exemple généralisé : 
     Cluster_1;nom-term1;nom-term2;nom-term3;...;nom-termn;
     ...
     Cluster_n;term1;term2;...;nom-termn;
@@ -21,5 +21,5 @@ npm install sur la console sous linux dans le répertoire des fichiers
     ...
     code-termn;gene1;gene2;..;genen;
 
-Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
-Chaque term GO est suivi par la liste de gènes annotés par lui.
+-Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
+-Chaque term GO est suivi par la liste de gènes annotés par lui.
