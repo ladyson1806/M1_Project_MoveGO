@@ -14,11 +14,11 @@ npm install sur la console sous linux dans le répertoire des fichiers
  - Un exemple est le fichier ZhouMesureHuman.csv
  - Exemple généralisé : 
     Cluster_1;nom-term1;nom-term2;nom-term3;...;nom-termn; 
-    ... 
+    
     Cluster_n;term1;term2;...;nom-termn; 
      
     code-term1;gene1;gene2;..;genen; 
-    ... 
+    
     code-termn;gene1;gene2;..;genen; 
 
  - Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
