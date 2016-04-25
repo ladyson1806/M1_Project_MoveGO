@@ -7,8 +7,8 @@
 * Last version : 08/04/2016
 *********************************************************/
 
-labelList= new Array;
-T_SIZE = 0.28; //taille du texte des labels
+var labelList= new Array;
+var T_SIZE = 0.28; //taille du texte des labels
 
 var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     if (elem.markt == undefined) {
