@@ -1,0 +1,143 @@
+Cluster_19;sulfur utilization;cell division;cell wall organization;chaperone-mediated protein folding;pilus assembly;
+Cluster_18;peptidoglycan catabolic process;peptidoglycan biosynthetic process;peptidoglycan metabolic process;
+Cluster_17;nucleoside diphosphate phosphorylation;'de novo' pyrimidine nucleobase biosynthetic process;enterobacterial common antigen biosynthetic process;pyrimidine nucleotide biosynthetic process;UTP biosynthetic process;GTP biosynthetic process;nucleotide phosphorylation;CTP biosynthetic process;
+Cluster_16;mRNA processing;rRNA processing;rRNA catabolic process;tRNA processing;enzyme-directed rRNA 2'-O-methylation;
+Cluster_15;cellular response to amino acid starvation;cellular response to zinc ion starvation;SOS response;cellular response to sulfur starvation;cellular response to oxidative stress;
+Cluster_14;phenylethylamine catabolic process;formaldehyde catabolic process;phosphatidylcholine metabolic process;cell wall macromolecule catabolic process;methylglyoxal catabolic process to D-lactate via S-lactoyl-glutathione;
+Cluster_13;anaerobic electron transport chain;formate oxidation;ATP synthesis coupled electron transport;anaerobic respiration;respiratory electron transport chain;
+Cluster_12;L-alpha-amino acid transmembrane transport;D-methionine transport;amino acid transmembrane transport;beta-alanine transport;glycine transport;isoleucine transport;branched-chain amino acid transport;L-alanine transport;amino acid transport;phenylalanine transport;leucine transport;tryptophan transport;D-serine transport;D-alanine transport;L-valine transmembrane transport;tyrosine transport;
+Cluster_11;response to antibiotic;response to selenite ion;response to cadmium ion;response to leucine;response to nickel cation;response to acidic pH;cellular response to antibiotic;
+Cluster_10;DNA duplex unwinding;protein homotetramerization;
+Cluster_9;chemotaxis;bacterial-type flagellum-dependent cell motility;cell motility;cell adhesion involved in single-species biofilm formation;
+Cluster_8;tripeptide transmembrane transport;p-aminobenzoyl-glutamate transmembrane transport;dipeptide transmembrane transport;oligopeptide transport;dipeptide transport;
+Cluster_7;protein autophosphorylation;internal peptidyl-lysine acetylation;protein adenylylation;
+Cluster_6;phosphorelay signal transduction system;iron ion homeostasis;regulation of cell shape;
+Cluster_5;hydrogen ion transmembrane transport;putrescine transport;antibiotic transport;protein transport;siderophore transport;S-methylmethionine transport;
+Cluster_4;glutathione metabolic process;tetrahydrofolate interconversion;sulfate assimilation;tetrahydrofolate biosynthetic process;glycopeptide catabolic process;translation;hydrogen sulfide biosynthetic process;
+Cluster_3;methionine biosynthetic process;tryptophan biosynthetic process;pantothenate biosynthetic process from valine;aromatic amino acid family biosynthetic process;D-cysteine catabolic process;L-asparagine biosynthetic process;L-serine biosynthetic process;cysteine biosynthetic process;cysteine biosynthetic process from serine;isoleucine biosynthetic process;valine biosynthetic process;leucine biosynthetic process;
+Cluster_2;tricarboxylic acid cycle;nitrate assimilation;glutamate biosynthetic process;glutamine metabolic process;cellular amino acid catabolic process;L-phenylalanine catabolic process;malate metabolic process;glycolate catabolic process;galactarate catabolic process;propionate metabolic process, methylcitrate cycle;arginine deiminase pathway;chorismate biosynthetic process;
+Cluster_1;DNA restriction-modification system;RNA phosphodiester bond hydrolysis, endonucleolytic;DNA repair;DNA recombination;DNA replication;DNA-dependent DNA replication;nucleic acid phosphodiester bond hydrolysis;transcription, DNA-templated;DNA replication proofreading;DNA biosynthetic process;
+
+GO:0009307;hsdS
+GO:0006099;prpC
+GO:0006749;yghU
+GO:0009086;mmuP;metF
+GO:0000162;trpC;trpE
+GO:1902600;dtpB
+GO:0000160;cheY
+GO:0046777;uspG
+GO:0006935;cheY;dppA
+GO:0035443;dtpB
+GO:1902604;abgT
+GO:0035442;dtpB;ydeE;abgT
+GO:0042128;narV;narY
+GO:0032508;recQ
+GO:0046677;yadC;mltC;pmrD
+GO:0033317;panB
+GO:1902475;livK;yifK;mmuP;brnQ
+GO:0072714;tsgA
+GO:0006537;gdhA
+GO:0019645;narV;narY
+GO:0015944;fdoI
+GO:0009073;trpC;trpE;aroC
+GO:0018393;cheY
+GO:0035999;metF
+GO:0090502;rnc
+GO:0006281;recQ;polB
+GO:0042773;nuoK
+GO:0018117;uspG
+GO:0071973;cheY
+GO:0015847;potH
+GO:0046686;zinT
+GO:0019447;dcyD
+GO:0006541;asnB
+GO:0048473;metQ
+GO:0070981;asnB
+GO:0009063;tynA;dcyD;asnB;yahI
+GO:0003333;yhjV;livK;yifK;mtr;hisQ;cycA;mmuP;brnQ;abgT
+GO:0055072;fhuE
+GO:0009061;ynfE;narV;fdoI;narY
+GO:0051289;metF;yeiG
+GO:0048870;cheY;uspG
+GO:0000103;cysJ;cysN
+GO:0046654;metF
+GO:0019607;tynA
+GO:0043201;lrp
+GO:0034198;leuB
+GO:0006397;rnc
+GO:0006559;tynA
+GO:0006108;dmlA
+GO:0006310;recQ
+GO:0009050;mpaA
+GO:0006260;recQ;polB
+GO:0022904;narV;fdoI;narY;nuoK
+GO:0006165;ndk
+GO:0009253;mpaA
+GO:0006261;polB
+GO:0046296;glcD
+GO:0009252;murD
+GO:0046294;yeiG
+GO:0042891;dtpB;cycA
+GO:0006564;serA
+GO:0046470;rssA
+GO:0006207;pyrI
+GO:0046392;garD
+GO:0001762;cycA
+GO:0006791;dcyD
+GO:0009246;wecH
+GO:0006364;rnc;rsmI
+GO:0008360;murD
+GO:0006221;ndk;pyrI
+GO:0015031;dtpB;oppA;dppA
+GO:0006412;hpf
+GO:0019679;prpC
+GO:0015816;cycA
+GO:0015891;fhuE
+GO:0015818;brnQ
+GO:0016075;rnc
+GO:0019546;yahI
+GO:0034224;zinT
+GO:0006228;ndk
+GO:0010045;nikR
+GO:0006183;ndk
+GO:0015803;livJ;livK;brnQ
+GO:0016998;mltC
+GO:0046939;ndk;uspG
+GO:0009423;aroC
+GO:0015808;cycA
+GO:0051301;murD;dicB
+GO:0015806;mmuP
+GO:0006241;ndk
+GO:0019344;cysJ;cysM
+GO:0070814;cysJ;cysN
+GO:0019243;yeiG
+GO:0090305;rnc;polB
+GO:0043709;yadC
+GO:0006535;cysM
+GO:0010447;yagU
+GO:0006865;yhjV;livJ;livK;argT;yifK;cycA;hisQ;mtr;metQ;mmuP;yddG;brnQ;abgT
+GO:0008033;rnc
+GO:0009097;ilvC
+GO:0006857;dtpB;oppA;ydeE;dppA;abgT
+GO:0009099;ilvC
+GO:0009098;leuB;lrp
+GO:0009432;recQ;polB
+GO:0071555;murD;mltC
+GO:0071236;mltC
+GO:0000453;rsmI
+GO:0042938;dtpB;ydeE;dppA;abgT
+GO:0010438;dcyD
+GO:0006351;ttdR;rpoA;nemR;ebgR;nikR;lrp
+GO:0015823;yddG
+GO:0045004;polB
+GO:0015820;livK;brnQ
+GO:0071897;polB
+GO:0015827;mtr;yddG
+GO:0061077;bepA
+GO:0042942;cycA
+GO:0042941;cycA
+GO:1903785;brnQ
+GO:0009297;yraJ
+GO:0034599;mltC
+GO:0015828;yddG
+GO:0000270;mpaA;murD;mltC
