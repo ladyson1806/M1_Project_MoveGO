@@ -1,14 +1,15 @@
 /*
+ * ORIGINAL VERSION:
  * Treemap Squared 0.5 - Treemap Charting library 
- *
  * https://github.com/imranghory/treemap-squared/
- *
  * Copyright (c) 2012 Imran Ghory (imranghory@gmail.com)
  * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
+ *
+ * MODIFICATIONS:
+ * Kristina Kastano, Savandara Besse
+ * Latest edition: 28/04/2015
  */
-
- /* Hints for JSHint */ 
- /*global Raphael, Treemap */ 
+ 
 
 var marks = [];
 var T_SIZE = 10; //taille du texte des labels
@@ -76,7 +77,7 @@ function drawBox(coordinates, label) {
     var h = (y1 - y0);
     mark.width(w).height(h);
     colorBox(mark);
-    createLabel(label, mark, y0, y1);
+    //createLabel(label, mark, y0, y1);
 }
 
 function colorBox(mark){
