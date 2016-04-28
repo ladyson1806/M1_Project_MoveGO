@@ -57,6 +57,7 @@ We can access all these data through "req.files.size" for example
 // Routage
 app.use('/', express.static(__dirname+"/public/index"));
 app.use('/treemap_vis', express.static(__dirname+"/public/visualisation"));
+app.use('/runExample', express.static(__dirname+"/public/example"));
 app.get('/export', function(req,res){
 
 
@@ -117,6 +118,11 @@ app.post('/',function(req,res,next){
 
 });
 
+
+app.post('/runExample',function(req,res,next){
+
+  res.redirect('/runExample');
+});
 
 // Create server
 app.listen(3000, function () {
