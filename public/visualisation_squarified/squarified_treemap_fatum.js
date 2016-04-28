@@ -1,18 +1,18 @@
 /*
- * ORIGINAL VERSION:
+ * ORIGINAL CODE WITH HE LIBRARY RAPHAEL:
  * Treemap Squared 0.5 - Treemap Charting library 
  * https://github.com/imranghory/treemap-squared/
  * Copyright (c) 2012 Imran Ghory (imranghory@gmail.com)
  * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
  *
- * MODIFICATIONS:
+ * ADAPTATION WITH THE LIBRARY FATUM:
  * Kristina Kastano, Savandara Besse
  * Latest edition: 28/04/2015
  */
  
 
 var marks = [];
-var T_SIZE = 10; //taille du texte des labels
+var T_SIZE = 15; //taille du texte des labels
 var labelList = [];
 var colors = [[255, 102, 102],[255, 178, 102], [153, 255, 255], [153, 153, 255], [153, 255, 102], [255, 153, 204], [255, 255, 102]];
 var colorIndex = 0;
@@ -77,7 +77,7 @@ function drawBox(coordinates, label) {
     var h = (y1 - y0);
     mark.width(w).height(h);
     colorBox(mark);
-    //createLabel(label, mark, y0, y1);
+    createLabel(label, mark, y0, y1);
 }
 
 function colorBox(mark){
@@ -95,57 +95,32 @@ function createLabel(name, mark, y0, y1, m){
     
     //affichage d'informations supplementaires pour le rectangle choisi
     /*  if ((m != undefined ) && ( elem.markt.id() == m.id())){
-      if (w >= (name.length*T_SIZE/2)){ //si le nom entre horizontalement
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-		.text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+	   //ajout dans l'html
+     */
+    //Affichage nom pour le reste de rectangles
+    //Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
+    if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
+	//Si la chaine peut entrer verticalement seulement
+	if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
+	    r = 1.57; //rotation de 90° (en radians)
+	label = window.fatum.addText().textColor(0,0,200,255).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
+	labelList.push(label);
+    }
+    //Autrement : separation de la chaîne de charactères
+    else {
+	var tmp = name.split(" ");
+	for (var i=0; i<tmp.length; i++)
+	    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
+		//Si la chaine separée n'entre pas, on ne mets pas le label
+		return;
+	for (var i=0; i<tmp.length; i++){
+	    var word = tmp[i];
+	    
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).
+		x(rectCenterX).y(y1-20-i*T_SIZE).rotation(r);
 	    labelList.push(label);
 	}
-	else { //autrement séparation en mots
-	    var tmp = name.split(" ");
-		for (var i=0; i<tmp.length; i++){
-		    var word = tmp[i];
-		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-			.text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		    labelList.push(label);
-		}
-	}
-	
-	label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).
-	    text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
-	labelList.push(label);
-	label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-	    .text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
-	    labelList.push(label);
-	label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-	    .text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
-	labelList.push(label);
-	return;
-	}
-    
-    */
-    	//Affichage nom pour le reste de rectangles
-	//Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
-	//if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
-    //Si la chaine peut entrer verticalement seulement
-    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
-	r = 1.57; //rotation de 90° (en radians)
-    label = window.fatum.addText().textColor(0,0,200,255).size(T_SIZE).text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-    labelList.push(label);
-	//Autrement : separation de la chaîne de charactères
-	/*else {
-	    var tmp = name.split(" ");
-	    for (var i=0; i<tmp.length; i++)
-		    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
-			//Si la chaine separée n'entre pas, on ne mets pas le label
-			return;
-	    for (var i=0; i<tmp.length; i++){
-		var word = tmp[i];
-		
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).
-		    x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		labelList.push(label);
-	    }
-	}*/
+    }
 }
 
 var treeInteractor = function (e) {
