@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>	
+      <link href='index.css' rel='stylesheet' type='text/css'>
+      <title>API</title>
+    </head>
+    <body>
+      <header>
+	<nav id ="nav" role="navigation">
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="#Overview">Overview</a></li>
+              <li><a href="#Sources">Sources</a></li>
+              <li><a href="#Contact">Contact</a></li>
+            </ul>
+          </div>
+    	</nav>
+      </header>
+      <div class = "col-lg-8 col-lg-offset-2">
+	 <h1 align ="center">API</h1>
+      <p>
+      This API concerns the functions implemented or reimplemented by our team for the visualisation of GO data in a treemap using the library FATuM.</br> Our code is based on the code written by David Auber and found here :
+      <a href="http://www.labri.fr/perso/aperrot/fatum/treedemo/index.html">http://www.labri.fr/perso/aperrot/fatum/treedemo/index.html</a>.</p>
+      <p>
+If you need the FATuM library API please visit <a href="http://www.labri.fr/perso/aperrot/fatum/API/index.html">FATuM website</a>.</p>
+      
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody>
+  
+<tr>
+  <td><code>tmap(elem, depth, x0, y0, y1, s, m)</code></td>
+  <td>creates a labeled treemap using the data structure passed as <code>elem</code></td>
+  <td>
+    <code> x0, y0, y1, y1</code>: the four FATuM coordinates for the position of the treemap</br>
+    <code>s</code>: determines if the nesting of the inner rectangles will be vertical or horizontal</br>
+    <code>m</code>: the eventual visual element clicked by the user
+  </td>
+</tr>
+
+<tr>
+  <td><code>findChosenTerm(elem, m)</code></td>
+  <td>searches in the data the term corresponding to the visual</br>element clicked by the user and adds it as the visual element's attribute.</td>
+  <td>
+    <code>elem</code>: the data structure</br>
+    <code>m</code>: the visual element clicked by the user</td>
+</tr>
+
+<tr>
+  <td><code>createLabel(elem, m, y0, y1)</code></td>
+  <td>creates a label of the data object <code>elem</code> using its attribute name</td>
+  <td><code>m</code>: the chosen visual element by the user</br>
+    <code>y0, y1</code>: coordinates of the visual element representing</br>
+    <code>elem</code>.
+  </td>
+</tr>
+
+<tr>
+  <td><code> clearLabels()</code></td>
+  <td>deletes the previous labels when the user has interacted with the treemap.</br> That way new labels can be placed in different ways.</td>
+  <td></td>
+</tr>
+
+<tr>
+  <td><code>colorRelatives(elem, m)</code></td>
+  <td>colors the data object given as <code>elem</code> if it has a parent-child relation with the</br> visual element chosen by the user <code>m</code></td>
+  <td><code>elem</code>: the data structure</br>
+</br><code>m</code>: the chosen visual element by the user</td>
+</tr>
+
+<tr>
+  <td><code>updateMarks(m)</code></td>
+  <td>calls clearLabels() and tmap() to reconstruct the treemap according to</br> the user's click position.</td>
+  <td> </td>
+</tr>
+
+<tr>
+  <td><code>treeInteractor()</code></td>
+  <td>determines the actions taken when the user has clicked on the treemap</td>
+  <td> </td>
+</tr>
+
+<tr>
+  <td><code>initVis()</code></td>
+  <td>initializes the visualisation calling different functions</td>
+  <td></td>
+</tr>
+
+</table>
+</div>
+    </body>
+</html>
+
+
+
