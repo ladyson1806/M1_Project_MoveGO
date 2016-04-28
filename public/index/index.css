@@ -92,8 +92,8 @@ body {
 .col-lg-8, .col-lg-offset-2 {
 	position : relative;
 	min-height : 1px;
-	padding-left : 25%;
-	padding-right : 25%;
+	padding-left : 10%;
+	padding-right : 10%;
 }
 	
 .abstract {
