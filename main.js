@@ -1,13 +1,9 @@
 /*
-* Title : Annotation dynamic treemap 
+* Title : Annotation dynamic treemap server
 * Author : Alexia
 * Date : 03/19/2016
 */
 
-
-// Used tutorial from https://codeforgeek.com/2015/01/render-html-file-expressjs/ to insert file.html
-// Used tutorial from https://codeforgeek.com/2014/11/file-uploads-using-node-js/ to upload user file
-// Used tutorial from https://www.terlici.com/2015/05/16/uploading-files-locally.html
 
 // Insert required modules 
 var express = require("express");   // to create web server
@@ -42,14 +38,16 @@ var upload = multer({ storage : storage}).single('file_name');
 
 /* Structure we got after upload
 
-{ fieldname: 'file_name',
+{ 
+  fieldname: 'file_name',
   originalname: 'clusters',
   encoding: '7bit',
   mimetype: 'application/octet-stream',
   destination: './uploads',
   filename: 'file_name-1458738794393',
   path: 'uploads/file_name-1458738794393',
-  size: 1075 }
+  size: 1075 
+}
 
 We can access all these data through "req.files.size" for example
 
@@ -79,7 +77,7 @@ app.get('/export', function(req,res){
     
     //set the archive name
     res.attachment('treemap_visualisation.zip');
-    //this is the streaming magic
+    
     archive.pipe(res);
     archive.append(fs.createReadStream('public/visualisation/data.js'), {name:'treemap_visualisation/data.js'});
     archive.append(fs.createReadStream('public/visualisation/fatum.data'), {name:'treemap_visualisation/fatum.data'});
@@ -88,14 +86,13 @@ app.get('/export', function(req,res){
     archive.append(fs.createReadStream('public/visualisation/index.html'), {name:'treemap_visualisation/visualisation.html'});
     archive.append(fs.createReadStream('public/visualisation/tree_visu.js'), {name:'treemap_visualisation/tree_visu.js'});
     archive.append(fs.createReadStream('public/visualisation/index.css'), {name:'treemap_visualisation/index.css'});
-    //you can add a directory using directory function
-    //archive.directory(dirPath, false);
+
     archive.finalize();
 });
 
 
 
-// After submission, file is uploaded (return an error if file not well uploaded)
+// After submission, file is uploaded (return an error if file was not well uploaded)
 // and execute file conversion. Then launch treemap visualisation with the converted file.
 app.post('/',function(req,res,next){
     upload(req,res,function(err) {
@@ -107,19 +104,18 @@ app.post('/',function(req,res,next){
       var result = script.objecting_csv(req.file.path);
       var tmp_clust_obj = result[0];
       var tmp_gene_obj = result[1];     
-      //script.write(JSON.stringify(tmp_obj), req.file.fieldname+'.json');
 
 
-      // Transform the JS object containing clusters into a JS objects containing all information
+      // Transform the JS object containing clusters into a JS objects containing all data
       var data = script.convert_to_treemap_format(tmp_clust_obj,tmp_gene_obj);
-      // Write data onto file (to be reused by FATUM)
+      // Write data onto file (to be reused by FATUM library)
       script.write('var data = '+JSON.stringify(data), 'public/visualisation/data.js');
 
       res.redirect('/treemap_vis');
 
     }) 
 
-  });
+});
 
 
 // Create server
