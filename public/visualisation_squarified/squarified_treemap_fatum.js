@@ -99,7 +99,7 @@ function createLabel(name, mark, y0, y1, m){
      */
     //Affichage nom pour le reste de rectangles
     //Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
-    if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
+    if ((w >= (name.length*T_SIZE/2) -10 ||  h >= (name.length*T_SIZE/2)-10 ) && (w>T_SIZE && h>T_SIZE) ){
 	//Si la chaine peut entrer verticalement seulement
 	if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
 	    r = 1.57; //rotation de 90° (en radians)
@@ -110,7 +110,7 @@ function createLabel(name, mark, y0, y1, m){
     else {
 	var tmp = name.split(" ");
 	for (var i=0; i<tmp.length; i++)
-	    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
+	    if (tmp[i].length*T_SIZE/2 > w+10 || tmp[i].length*T_SIZE > h+10)
 		//Si la chaine separée n'entre pas, on ne mets pas le label
 		return;
 	for (var i=0; i<tmp.length; i++){
