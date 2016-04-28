@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+	
+<html>
+
+	<head>
+	
+	<meta charset="utf-8"></meta>
+		
+	<meta name="author" content ="Baba BARO - Savandara BESSE 
+								- Kristina KASTANO- Alexia SOUVANE"></meta>
+		
+	<title>Homepage - ANNOT-GENES</title>
+	
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link href='index.css' rel='stylesheet' type='text/css'>
+	
+	<script type="text/javascript" src="index.js"></script>
+				
+	</head>
+	
+	<body id="page-top">
+		<header>
+		
+	    <nav id ="nav" role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how_to.html">How to</a></li>
+                    <li><a href="#Sources">Sources</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                </ul>
+            </div>
+    	</nav>
+    	
+    	</header>
+	
+    	<section>
+    		<div class="banner">
+    					<h1 align ="center">ANNOT-GENES</h1>
+    					<h3 align ="center">WEB visualization tool for functional annotation of genes</h2>
+			</div>
+		
+		</section>
+		
+		<section id="Overview">
+		
+			<div class = "col-lg-8 col-lg-offset-2">
+			<br>
+			<h2>How to use ANNOT-GENES</h2>
+
+<p>ANNOT-GENES will help you to visualize results of gene annotation via an interactive treemap. Our website simply takes as input a list of annotation clusters and a list of genes associated to each terms. Then returns a dynamic treemap of it. Here, we will explain fonctionnalities offered by our website and how to use them. </p> </br>
+
+<h4>Input</h4>
+
+<p> In a first time, you have to get a csv format file. This file should contain clusters of terms in a specific format. Here is an example of file format needed :</p>
+
+<img src="Images/example1.png"; align="center">
+
+</br>
+</br>
+
+<p>You have to upload this csv file on the website to obtain a treemap of your clusters.</p>
+
+</br>
+
+
+<h4>Dynamic Treemap</h4>
+
+<p>The dynamic treemap obtained represents all clusters. A cluster is represented by a big colored rectangle. Each cluster has a different color. In each cluster you could find all the terms presents in the cluster.</p>
+
+<ul>
+	<li>If you click on a specific cluster, information about the cluster will display below treemap. Hence, you could know all the terms and all the genes annotated for this specific cluster.</li>
+
+	<li>If you click on a specific term, different information will display. Hence, you could discover the Gene Ontology ID of this term, theirs ICnuno, ICzhou, parents, children and genes annotated for this term.</li>
+</ul>
+
+</br>
+
+<h4>Export</h4>
+
+<p>You have the possibility to export the resulting treemap. This export will allow you to see the treemap locally without having need to get connected to the internet. A README would be provided in the downloaded folder to help you obtaining your treemap.</p>
+
+</br>
+
+<h4>Example</h4>
+<p> Anything is better than a good example, then let's launch the resulting treemap of example below: </p>
+
+
+		
+			<p class = "abstract" align ="justify">
+
+
+
+</p>
+
+
+		</section>
+		
+		<section>
+		
+		<div id ="upload">
+		
+			<form 	id        =  "runExample"
+			     	enctype   =  "multipart/form-data"
+     				action    =  "/runExample"
+     				method    =  "post">			
+			
+		</section>
+		
+	
+	
+		<p align="center">
+		<br>
+		<br>
+		<INPUT type="submit" value="Run example" name="runExample"></p>
+		
+		</section>
+
+		</form>
+
+
+		</body>
+	
+</html>
+
+
