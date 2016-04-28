@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>	
+		<link href='index.css' rel='stylesheet' type='text/css'>
+	<title>Visualisation - ANNOT-GENES</title>
+    </head>
+
+    <body>
+	<header>
+	
+	    <nav id ="nav" role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#Overview">Overview</a></li>
+                    <li><a href="#Sources">Sources</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+                </ul>
+            </div>
+    	</nav>
+    	
+    </header>
+	<h1 id="tree-visualizations" align="center">Treemap visualization</h1>
+	
+	<!-- Fenêtre qui contient la visualisation-->
+	<canvas id="fatum-demo" style="border: solid 1px; width: 100%; height: 983px;">Sorry, your browser does not support the canvas element</canvas>
+
+	<p>
+	  
+	  <!-- ACCES A LA BIBLIOTHEQUE FATUM -->
+	  
+	  <!-- 1. AVEC L'URL - ÇA NE MARCHE PAS
+	      <script>
+		var prefix = "www.labri.fr/perso/aperrot/resources/fatum/"
+		Fatum = {memoryInitializerPrefixURL:prefix, filePackagePrefixURL:prefix};
+	      </script>
+	      <script src="http://www.labri.fr/perso/aperrot/resources/fatum/fatum.js"></script> -->
+
+	  <!-- 2. AVEC LE FICHIER du package dans le repertoire -->
+	  <script src="fatum.js"></script>
+
+
+	  <!-- CHARGEMENT DONNEES -->  
+	  <script src="data.js"></script>
+
+	  <!-- SCRIPT POUR LA VISUALISATION-->
+	  <script src="tree_visu.js"></script>
+	  <script src="tree_visu_2.js"></script>
+	</p>
+
+
+	<form 	id  =  "downloadForm"
+			enctype   =  "multipart/form-data"
+     		action    =  "/export"
+     		method    =  "get">
+			
+			<p align = center>
+			<br>
+				TO EXPORT :
+			</br>
+
+
+
+		<input type="submit" value="Export" name="export"></p>
+		
+
+		</form>
+
+    </body>
+</html>
