@@ -124,15 +124,7 @@ function createLabel(elem, m, y0, y1, w, h){
 		    labelList.push(label);
 		}
 	    }
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).
-		text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
-	    labelList.push(label);
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-		.text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
-	    labelList.push(label);
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-		.text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
-	    labelList.push(label);
+	    	show_info(name,elem);
 		return;
 	    }
 	
@@ -191,6 +183,29 @@ var treeInteractor = function (e) {
     recSum(data);
     updateMarks(m);
     window.fatum.animate(500);
+}
+
+function show_info(name,elem) {
+	var element = document.getElementById("info_array");
+	var html = "";
+	html += "<br><br>",
+	html += '<table align="center" border="1px solid">';
+	html += '<tr>';
+	html += '<th>Term Name</th>';
+	html += '<th>GO term</th>';
+	html += '<th>ICnuno</th>';
+	html += '<th>ICzhou</th>';
+	html += '<th>Genes</th>';
+	html += '</tr>';
+	html += '<tr>';
+	html += '<td>'+name+'</td>';
+	html += '<td>'+elem.term+'</td>';
+	html += '<td>'+Math.round(elem.ICnuno*100)/100+'</td>';
+	html += '<td>'+Math.round(elem.ICzhou*100)/100+'</td>';
+	html += '<td>'+elem.gene+'</td>';
+	html += '</tr>';
+	html += '</table>';
+	element.innerHTML = html;
 }
 
 var initVis = function () {
