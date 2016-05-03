@@ -165,7 +165,7 @@ var convert_to_treemap_format = function(clusters_obj,gene_obj)
         if(term != "")
         {
 
-          var id = info_obj[term].ID;
+          var id = info_obj[term].TermID;
           var child_list = children_obj[id];
           var parents_list = parent_obj[id];
           var gene_list = gene_obj[id];
@@ -177,7 +177,7 @@ var convert_to_treemap_format = function(clusters_obj,gene_obj)
                                       "term" : id,
                                       "ICnuno" : info_obj[term].ICNuno,
                                       "ICzhou" : info_obj[term].ICZhou,
-                                      "depth" : info_obj[term].depth,
+                                      "depth" : info_obj[term].DepthOntology,
                                       "parents" : parents_list,
                                       "term_children" : child_list,
                                       "gene" : gene_list
@@ -211,4 +211,3 @@ var convert_to_treemap_format = function(clusters_obj,gene_obj)
 exports.objecting_csv = objecting_csv;
 exports.write = write_on_file;
 exports.convert_to_treemap_format = convert_to_treemap_format;
-
