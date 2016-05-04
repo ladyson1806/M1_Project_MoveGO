@@ -10,7 +10,7 @@
 	<meta name="author" content ="Baba BARO - Savandara BESSE 
 								- Kristina KASTANO- Alexia SOUVANE"></meta>
 		
-	<title>Homepage - ANNOT-GENES</title>
+	<title>Homepage</title>
 	
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href='index.css' rel='stylesheet' type='text/css'>
@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="how_to.html">How to</a></li>
-                    <li><a href="#Sources">Sources</a></li>
+                    <li><a href="api.html">API</a></li>
                     <li><a href="#Contact">Contact</a></li>
                 </ul>
             </div>
@@ -38,60 +38,50 @@
     	<section>
     		<div class="banner">
     					<h1 align ="center">ANNOT-GENES</h1>
-    					<h3 align ="center">WEB visualization tool for functional annotation of genes</h2>
+    					<h3 align ="center">WEB visualization tool for functional 
+						annotation of genes</h2>
 			</div>
-		
 		</section>
 		
 		<section id="Overview">
 		
 			<div class = "col-lg-8 col-lg-offset-2">
 			<br>
-			<h3>Goal of this site</h3>
+			<h3>What is ANNOT-GENES ?</h3>
 		
-			<p class = "abstract" align ="justify">
+			<p class = "abstract" align ="justify">	The broadband sequencing contributes largely to the biological study by obtaining a significant number of information on the genome. The display of the note on genes is important for the exploitation of the data, she allows to see in clear and structured way the set of notes attributed to a cluster of genes. It is in this purpose that this Web interface was developed. It has for objective to allow generate a treemap from data in the format CSV which are converted in format Json. The data in format CSV must be structured in a way to allow their conversion in a efficient way.<br></p>
 
-The broadband sequencing contributes largely to the biological study by obtaining a significant number of information on the genome. The display of the note on genes is important for the exploitation of the data, she allows to see in clear and structured way the set of notes attributed to a cluster of genes. It is in this purpose that this Web interface was developed. It has for objective to allow generate a treemap from data in the format CSV which are converted in format Json. The data in format CSV must be structured in a way to allow their conversion in a efficient way.<br>
-	  
-</p>
-
-<p> File under Json format</p>
-<img src="/net/cremi/bbaro/Bureau/Exemple_format_Json.png" alt="Format Json" style="width:304px;height:228px"; align="center">
+			<figure align="center">
+				<img src="/net/cremi/bbaro/Bureau/Exemple_format_Json.png" alt="CSV File" style="width:304px;height:228px" title="CSV File">
+				<figcaption>CSV File</figcaption>
+			</figure>
 
 		</section>
+		
+		<form 	id =  "uploadForm"
+				enctype = "multipart/form-data"
+     			action = "/"
+     			method = "post">
+			
 		
 		<section>
+			<div id="upload">
 		
-		<div id ="upload">
-		
-			<form 	id        =  "uploadForm"
-			     	enctype   =  "multipart/form-data"
-     				action    =  "/"
-     				method    =  "post">
+			<p align = center><br>ADD YOUR FILE .CSV HERE :<br><br>
+				<input type="file" value="Browse..." name="file_name" align="center"><br><br></p>
 			
-			<p align = center>
-			<br>
-				ADD YOUR FILE .CSV HERE :<br>
-			<br>
-				<input type="file" value="Browse..." name="file_name" align="center">
-			<br><br>
-			</p>
-			
-		</section>
+			</div>			
 		
-	
-	
-		<p align="center">
-		<br>
-		<br>
-		<INPUT type="submit" value="Run Visualisation" name="Run Visualisation"></p>
+			<div id="run-button">
+		
+			<p align="center"><br><br><INPUT type="submit" value="Run Visualisation" name="Run Visualisation"></p>
+			
+			</div>
 		
 		</section>
 
 		</form>
 
-
 		</body>
 	
 </html>
-
