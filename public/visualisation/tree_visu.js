@@ -89,7 +89,7 @@ function changeColor(elem, grey) {
 	    if (elem.color == undefined) {
 		if (parent == undefined )
 		    elem.color = [100,100,100,255];
-		else {
+		else if (elem.children != undefined) {
 		    var col = parent.color;
 		    var hsv = rgbToHsv(col[0], col[1], col[2]);
 		    hsv[1] = 100/(depth+1);
@@ -104,6 +104,9 @@ function changeColor(elem, grey) {
 		    hsv[0] = Math.max(hsv[0], 0);
 		    hsv[0] = Math.min(hsv[0], 360);
 		    elem.color= hsvToRgb(hsv[0], hsv[1], hsv[2]);
+		}
+		else {
+		    elem.color = parent.color;
 		}
 	    }
 	    if (elem.markt != undefined) {
