@@ -7,7 +7,6 @@
 
 // Insert required modules 
 var express = require("express");   // to create web server
-var path    = require("path");      // to send html file to front-end
 var multer  = require('multer');    // to upload file
 var fs      = require("fs");        // to read/write in file
 var archiver= require("archiver");  // to dowload .zip
