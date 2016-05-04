@@ -7,8 +7,8 @@
 * Last version : 08/04/2016
 *********************************************************/
 
-var labelList= new Array;
-var T_SIZE = 0.28; //taille du texte des labels
+labelList= new Array;
+T_SIZE = 0.28; //taille du texte des labels
 
 var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     if (elem.markt == undefined) {
@@ -23,13 +23,6 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     if (m != undefined && elem.name == 'data'){
 	//détection du terme choisi
 	findChosenTerm(elem, m);
-	document.getElementById("info_array").innerHTML = "";
-    }
-    
-    else if (m != undefined && m.id() == elem.markt.id() && elem.children != undefined) {
-    //console.log("cluster");
-		showInfoChosenElement(elem);
-    
     }
     var w = (x1 - x0);
     var h = (y1 - y0);
@@ -84,6 +77,7 @@ function findChosenTerm(elem, m){
 	}
     else
 	if ( elem.markt.id() == m.id() ){
+	    //console.log("Trouvé ! "+ elem.term);
 	    m.term = elem.term; 
 	}
 }
@@ -95,12 +89,12 @@ function colorRelatives(elem, m){
 	
 	for (var i in elem.term_children){
 	    if ( elem.term_children[i] == m.term ){ 
-		elem.markt.color(255, 51, 51); //rouge
+		elem.markt.color(255, 51, 51, 255); //rouge
 	    }
 	}
 	for (var j in m.term.parents){
 	    if ( elem.parents[j] == m.term ){ 
-		elem.markt.color(51, 153, 255); //bleue
+		elem.markt.color(51, 153, 255, 255); //bleue
 	    }
 	}
     }
@@ -110,7 +104,7 @@ function createLabel(elem, m, y0, y1, w, h){
     //creation d'un label (texte) pour chaque terme
     var name = elem.name;
     var label;
-	var r = 0; //rotation du label, par defaut la disposition est horizontale
+	var r = 0; //rotation du label, par defaut la disposition est orizontale
 	var rectCenterX = elem.markt.x()
 	var rectCenterY = elem.markt.y();	
 	
@@ -130,10 +124,16 @@ function createLabel(elem, m, y0, y1, w, h){
 		    labelList.push(label);
 		}
 	    }
-
-	    showInfoChosenElement(elem);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).
+		text(elem.term).x(rectCenterX).y(y0+3*T_SIZE).rotation(r); 
+	    labelList.push(label);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+		.text("ICnuno "+elem.ICnuno).x(rectCenterX).y(y0+2*T_SIZE).rotation(r); 
+	    labelList.push(label);
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
+		.text("ICzhou "+elem.ICzhou).x(rectCenterX).y(y0+T_SIZE).rotation(r); 
+	    labelList.push(label);
 		return;
-		
 	    }
 	
 	//Affichage nom pour le reste de rectangles
@@ -162,7 +162,6 @@ function createLabel(elem, m, y0, y1, w, h){
 		    x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
 		labelList.push(label);
 	    }
-	
 	}
 }
 
@@ -177,69 +176,6 @@ function updateMarks(m) {
     tmap(data, 1, - 20, -10, 13, 8, false, m);
 }
 
-
-function showInfoChosenElement(elem) {
-	var element = document.getElementById("info_array");
-	var html = "<br><br>";
-	var table_header = "";
-	table_header += '<table align="center">';
-	table_header += '<tr>';
-	table_header += '<th>Term Name</th>';
-	table_header += '<th>GO term</th>';
-	table_header += '<th>ICnuno</th>';
-	table_header += '<th>ICzhou</th>';
-	table_header += '<th>Genes</th>';
-	table_header += '<th>Parent terms</th>';
-	table_header += '<th>Child terms</th>';
-	table_header += '</tr>';
-	
-	
-	if (elem.children != undefined) {
-		html += '<h3 align="center">'+elem.name+'</h3>';
-		html += table_header;
-		for ( var i in elem.children) {		
-    		html += '<tr>';
-			html += '<td>'+elem.children[i].name+'</td>';
-			html += '<td>'+elem.children[i].term+'</td>';
-			html += '<td>'+Math.round(elem.children[i].ICnuno*100)/100+'</td>';
-			html += '<td>'+Math.round(elem.children[i].ICzhou*100)/100+'</td>';
-			html += '<td>';
-			for (var j in elem.children[i].gene) {
-				html += elem.children[i].gene[j];
-				if (j != elem.children[i].gene.length - 1)
-					html += ", ";
-			}
-			html += '</td>';
-			html += '<td>'+elem.children[i].parents+'</td>'
-			html += '<td>'+elem.children[i].term_children+'</td>'
-			html += '</tr>';
-    	}
-    }
-	
-	else {	
-		html += table_header;
-		html += '<tr>';
-		html += '<td>'+elem.name+'</td>';
-		html += '<td>'+elem.term+'</td>';
-		html += '<td>'+Math.round(elem.ICnuno*100)/100+'</td>';
-		html += '<td>'+Math.round(elem.ICzhou*100)/100+'</td>';
-		html += '<td>';
-		for (var i in elem.gene) {
-				html += elem.gene[i];
-				if (i != elem.gene.length - 1)
-					html += ", ";
-		}
-		html += '</td>';
-		html += '<td>'+elem.parents+'</td>'
-			html += '<td>'+elem.term_children+'</td>'
-		html += '</tr>';
-	}
-	
-	html += '</table>';
-		
-	element.innerHTML = html;
-}
-	
 
 var treeInteractor = function (e) {
     var rect = canvas.getBoundingClientRect();  
@@ -256,8 +192,6 @@ var treeInteractor = function (e) {
     updateMarks(m);
     window.fatum.animate(500);
 }
-
-
 
 var initVis = function () {
   window.fatum = Fatum.createFatumContext(canvas);
