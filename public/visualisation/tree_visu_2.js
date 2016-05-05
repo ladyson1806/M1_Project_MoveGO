@@ -27,8 +27,7 @@ var tmap = function (elem, depth, x0, y0, x1, y1, s, m) {
     }
     
     else if (m != undefined && m.id() == elem.markt.id() && elem.children != undefined) {
-    //console.log("cluster");
-		showInfoChosenElement(elem);
+	showInfoChosenElement(elem);
     
     }
     var w = (x1 - x0);
@@ -109,65 +108,48 @@ function createLabel(elem, m, y0, y1, w, h){
     //creation d'un label (texte) pour chaque terme
     var name = elem.name;
     var label;
-	var r = 0; //rotation du label, par defaut la disposition est horizontale
-	var rectCenterX = elem.markt.x()
-	var rectCenterY = elem.markt.y();	
-	
-	//affichage d'informations supplementaires pour le rectangle choisi
-	if ((m != undefined ) && ( elem.markt.id() == m.id())){
-	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre horizontalement
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-		    .text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-		labelList.push(label);
-	    }
-	    else { //autrement séparation en mots
-		var tmp = name.split(" ");
-		for (var i=0; i<tmp.length; i++){
-		    var word = tmp[i];
-		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-			.text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		    labelList.push(label);
-		}
-	    }
-
-	    showInfoChosenElement(elem);
+    var r = 0; //rotation du label, par defaut la disposition est horizontale
+    var rectCenterX = elem.markt.x()
+    var rectCenterY = elem.markt.y();	
+    
+    //si un rectangle a été cliqué
+    if ((m != undefined ) && ( elem.markt.id() == m.id())){
+	showInfoChosenElement(elem);
+    }
+    
+    //Affichage du nom de chaque terme
+    //Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
+    if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
+	//Si la chaine peut entrer verticalement seulement
+	if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
+	    r = 1.57; //rotation de 90° (en radians)
+		
+	label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name)
+	    .x(rectCenterX).y(rectCenterY).rotation(r); 
+	labelList.push(label);
+    }	
+    
+    //Autrement : separation du nom en plusieurs mots
+    else {
+	var tmp = name.split(" ");
+	for (var i=0; i<tmp.length; i++)
+	    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
+		//Si la chaine separée n'entre pas, on ne mets pas le label
 		return;
-		
-	    }
-	
-	//Affichage nom pour le reste de rectangles
-	//Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
-	else if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
-	    //Si la chaine peut entrer verticalement seulement
-	    if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
-		r = 1.57; //rotation de 90° (en radians)
-		
-	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(name)
-		.x(rectCenterX).y(rectCenterY).rotation(r); 
+	for (var i=0; i<tmp.length; i++){
+	    var word = tmp[i];
+	    
+	    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).
+		x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
 	    labelList.push(label);
-	}	
-	
-	//Autrement : separation de la chaîne de charactères
-	else {
-	    var tmp = name.split(" ");
-	    for (var i=0; i<tmp.length; i++)
-		    if (tmp[i].length*T_SIZE/2 > w || tmp[i].length*T_SIZE > h)
-			//Si la chaine separée n'entre pas, on ne mets pas le label
-			return;
-	    for (var i=0; i<tmp.length; i++){
-		var word = tmp[i];
-		
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE).text(word).
-		    x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		labelList.push(label);
-	    }
-	
 	}
+	
+    }
 }
 
 function clearLabels(){
     for (var i in labelList)
-	    fatum.deleteText(labelList[i]);
+	fatum.deleteText(labelList[i]);
 }
 
 function updateMarks(m) {
