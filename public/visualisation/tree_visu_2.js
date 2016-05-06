@@ -132,6 +132,7 @@ function createLabel(elem, m, y0, y1, w, h){
 
 	showInfoChosenElement(elem);
     }
+    }
     
     //Affichage du nom de chaque terme
     //Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
