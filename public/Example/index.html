@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>	
+		<link href='index.css' rel='stylesheet' type='text/css'>
+	<title>Visualisation</title>
+    </head>
+
+    <body>
+	<header>
+	
+	    <nav id ="nav" role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+    	</nav>
+    	
+    </header>
+	<h1 id="tree-visualizations" align="center">Treemap visualization</h1>
+	
+	<section id="intro">
+		<div class="col-md-8 col-md-offset-2">
+		
+		<p align="justify">Click on the term that you want to see more informations about it.  They appear under the visualisation on a table.  <br> 
+		When you choose a specific term, you can see : 
+		<ul>
+			<li>in <font color="#3399FF"><b>blue</b></font> its parents.</li>
+			<li>in <font color="#FF3333"><b>red</b></font> its children. </li>
+		</ul>
+		</p>
+		
+		</div>
+		
+	</section>
+	
+	<!-- Fenêtre qui contient la visualisation-->
+	
+	<section>
+	
+		<canvas id="fatum-demo" style="border: solid 1px; width: 100%; height: 983px;">Sorry, your browser does not support the canvas element</canvas>
+		
+		 <!-- ACCES A LA BIBLIOTHEQUE FATUM -->
+	  
+	  <!-- 1. AVEC L'URL - ÇA NE MARCHE PAS
+	      <script>
+		var prefix = "www.labri.fr/perso/aperrot/resources/fatum/"
+		Fatum = {memoryInitializerPrefixURL:prefix, filePackagePrefixURL:prefix};
+	      </script>
+	      <script src="http://www.labri.fr/perso/aperrot/resources/fatum/fatum.js"></script> -->
+
+	  <!-- 2. AVEC LE FICHIER du package dans le repertoire -->
+	  <script src="fatum.js"></script>
+
+
+	  <!-- CHARGEMENT DONNEES -->  
+	  <script src="data.js"></script>
+
+	  <!-- SCRIPT POUR LA VISUALISATION-->
+	  <script src="tree_visu.js"></script>
+	  <script src="tree_visu_2.js"></script>
+	  
+	</section>
+	
+	
+	<section>
+		<div class="col-md-8 col-md-offset-2">
+		
+			<div id="info_array">
+		
+			</div>
+			
+	</section>
+	
+
+
+	<form 	id  =  "downloadForm"
+			enctype   =  "multipart/form-data"
+     		action    =  "/export"
+     		method    =  "get">
+			
+			<p align = center>
+			<br>
+				TO EXPORT :
+			</br>
+
+
+
+		<input type="submit" value="Export" name="export"></p>
+		
+
+		</form>
+
+    </body>
+</html>
