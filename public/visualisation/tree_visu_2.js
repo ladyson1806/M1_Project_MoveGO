@@ -170,8 +170,6 @@ function showInfoChosenElement(elem) {
 	table_header += '<th>ICnuno</th>';
 	table_header += '<th>ICzhou</th>';
 	table_header += '<th>Genes</th>';
-	table_header += '<th>Parent terms</th>';
-	table_header += '<th>Child terms</th>';
 	table_header += '</tr>';
 	
 	
@@ -191,8 +189,6 @@ function showInfoChosenElement(elem) {
 					html += ", ";
 			}
 			html += '</td>';
-			html += '<td>'+elem.children[i].parents+'</td>'
-			html += '<td>'+elem.children[i].term_children+'</td>'
 			html += '</tr>';
     	}
     }
@@ -211,8 +207,6 @@ function showInfoChosenElement(elem) {
 		    html += ", ";
 	    }
 	    html += '</td>';
-	    html += '<td>'+elem.parents+'</td>';
-	    html += '<td>'+elem.term_children+'</td>';
 	    html += '</tr>';
 	}
 	
