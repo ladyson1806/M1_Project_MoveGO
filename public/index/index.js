@@ -3,6 +3,8 @@
 * Author : Savandara BESSE
 * Created : 2014/04/05
 ***/
+
+/*Add other buttons to run a visualization -not used-*/
 var res;
 function add_Browse(id) {
 	var element = document.getElementById(id); 
@@ -49,5 +51,18 @@ function howMany_Files() {
 		default :
 			console.log("Don't write any number.")
 		}
+}
+
+/*Mail display*/
+
+function Mail_display() {
+	var element = document.getElementById("Mail"); 
+	var html = "<ul>";
+	html += '<li><a href="mailto:baba.baro@etu.u-bordeaux.fr">baba.baro@etu.u-bordeaux.fr</a></li>';
+	html += '<li><a href="mailto:savandara.besse@etu.u-bordeaux.fr">savandara.besse@etu.u-bordeaux.fr</a></li>';
+	html += '<li><a href="mailto:kristina.kastano@etu.u-bordeaux.fr">kristina.kastano@etu.u-bordeaux.fr</a></li>';
+	html += '<li><a href="mailto:alexia.souvane@etu.u-bordeaux.fr">alexia.souvane@etu.u-bordeaux.fr</a></li>';
+	html += "</ul>";
+	element.innerHTML = html;
 }
 	
