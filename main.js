@@ -1,6 +1,6 @@
 /*
 * Title : Annotation dynamic treemap server
-* Author : Alexia
+* Author : Alexia Souvane
 * Date : 03/19/2016
 */
 
@@ -60,10 +60,7 @@ app.use('/runExample', express.static(__dirname+"/public/Example"));
 app.get('/export', function(req,res){
 
 
-    // Helped with https://www.npmjs.com/package/archiver
-
     var archive = archiver('zip');
-
 
     archive.on('error', function(err) {
         res.status(500).send({error: err.message});
