@@ -114,29 +114,12 @@ function createLabel(elem, m, y0, y1, w, h){
     
     //si un rectangle a été cliqué
     if ((m != undefined ) && ( elem.markt.id() == m.id())){
-    		if ((m != undefined ) && ( elem.markt.id() == m.id())){
-	    if (w >= (name.length*T_SIZE/2)){ //si le nom entre horizontalement
-		label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-		    .text(name).x(rectCenterX).y(rectCenterY).rotation(r); 
-		labelList.push(label);
-	    }
-	    else { //autrement séparation en mots
-		var tmp = name.split(" ");
-		for (var i=0; i<tmp.length; i++){
-		    var word = tmp[i];
-		    label = window.fatum.addText().textColor(0,0,200,200).size(T_SIZE)
-			.text(word).x(rectCenterX).y(y1-0.5-i*T_SIZE).rotation(r);
-		    labelList.push(label);
-		}
-	    }
-
 	showInfoChosenElement(elem);
-    }
     }
     
     //Affichage du nom de chaque terme
     //Si la chaine entière peut entrer horizontalement ou verticalement dans le rectangle
-    else if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
+    if ((w >= (name.length*T_SIZE/2) ||  h >= (name.length*T_SIZE/2)) && (w>T_SIZE && h>T_SIZE) ){
 	//Si la chaine peut entrer verticalement seulement
 	if (w < (name.length*T_SIZE/2) && h >= (name.length*T_SIZE/2))
 	    r = 1.57; //rotation de 90° (en radians)
@@ -187,6 +170,8 @@ function showInfoChosenElement(elem) {
 	table_header += '<th>ICnuno</th>';
 	table_header += '<th>ICzhou</th>';
 	table_header += '<th>Genes</th>';
+	table_header += '<th>Parent terms</th>';
+	table_header += '<th>Child terms</th>';
 	table_header += '</tr>';
 	
 	
@@ -206,6 +191,8 @@ function showInfoChosenElement(elem) {
 					html += ", ";
 			}
 			html += '</td>';
+			html += '<td>'+elem.children[i].parents+'</td>'
+			html += '<td>'+elem.children[i].term_children+'</td>'
 			html += '</tr>';
     	}
     }
@@ -224,6 +211,8 @@ function showInfoChosenElement(elem) {
 		    html += ", ";
 	    }
 	    html += '</td>';
+	    html += '<td>'+elem.parents+'</td>';
+	    html += '<td>'+elem.term_children+'</td>';
 	    html += '</tr>';
 	}
 	

@@ -68,7 +68,6 @@ function accept(elem, leaf, intern, parent, depth) {
 
 function changeSize(elem, k) {
     accept(elem, function (elem) {
-	console.log(elem.origin);
     elem.size = elem.origin * k;
   });
 }
