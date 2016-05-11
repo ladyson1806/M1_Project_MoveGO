@@ -6,7 +6,7 @@
 *********************************************************/
 
 var markRev = {};
-var canvas = document.getElementById('fatum-demo');
+var canvas = document.getElementById('fatum-visu');
 
 function rgbToHsv(r, g, b) {
     r /= 255;
@@ -30,7 +30,7 @@ function rgbToHsv(r, g, b) {
         }
         h /= 6;
     }
-    return [ Math.round(h * 360), Math.round(s * 100),  Math.round(v * 100) ];
+    return [Math.round(h * 360), Math.round(s * 100),  Math.round(v * 100)];
 }
 
 function hsvToRgb(h, s, v) {
@@ -50,7 +50,7 @@ function hsvToRgb(h, s, v) {
 
         b = [p, p, t, v, v, q][mod];
 
-    return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) , 255];
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) , 255];
 }
 
 function accept(elem, leaf, intern, parent, depth) {
@@ -61,13 +61,13 @@ function accept(elem, leaf, intern, parent, depth) {
 	for (var i in elem.children)
 	    accept(elem.children[i], leaf, intern, elem, depth + 1);
     }
-    else {
+    else
 	leaf(elem, parent, depth);
-    }
 }
 
 function changeSize(elem, k) {
     accept(elem, function (elem) {
+	console.log(elem.origin);
     elem.size = elem.origin * k;
   });
 }
@@ -80,7 +80,6 @@ function changeColor(elem, grey) {
 	    var c = elem.color;
 	    var y = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 	    elem.markt.color(y, y, y, 255);
-	    //code original : deux autres marks en plus
 	}
     }
     else {
@@ -110,7 +109,6 @@ function changeColor(elem, grey) {
 	    }
 	    if (elem.markt != undefined) {
 		elem.markt.color(elem.color);
-		//code original : deux autres marks en plus
 	    }
 	};
     }
