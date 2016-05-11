@@ -1,7 +1,10 @@
 # annot_genes
 - Pour pouvoir utiliser cette application web localement il est nécessaire
-d'avoir installé sur votre ordinateur le serveur nodejs et son package manager
-npm. Sous linux avec les commandes aptitude install node et aptitude install npm. 
+d'avoir installé sur votre ordinateur la plateforme nodejs et son package manager
+npm. Sous linux avec les commandes 
+ > aptitude install node
+ > aptitude install npm
+
 Sous windows sur le site https://nodejs.org/en/. 
 - Après avoir téléchargé tous le fichiers, lancez la commande
 npm install sur la console sous linux dans le répertoire des fichiers 
