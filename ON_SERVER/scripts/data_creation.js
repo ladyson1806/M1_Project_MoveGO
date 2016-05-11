@@ -56,6 +56,9 @@ var objecting_csv = function (file_path)
 
   for (var j = i+1 ; j < lines.length ; j++)
   {
+     var GO = lines[j][0]+lines[j][1];
+    if ( GO == "GO")
+    {
     var currentline = lines[j].split(";"); // Obtaining currentline = [GO1 , GO2 , ... , GOn ]
     var associated_GO = [] ;
 
@@ -65,6 +68,7 @@ var objecting_csv = function (file_path)
     }
 
     result[ [currentline[0]] ] = associated_GO ;
+    }
 
   }
 
