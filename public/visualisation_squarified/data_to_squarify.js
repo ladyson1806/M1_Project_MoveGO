@@ -1,5 +1,12 @@
+/*
+* Data conversion
+* Author : Kristina Kastano
+* Data conversion from our format to the format used here :
+*     data = [[size1, size2, ...], [size1, size2, size3,...],...]
+*     labels = [['a', 'b', ...], ['c', 'd', 'e', ...]]
+*/
 
-function dataSizes(elem, sizesArray, labels){
+function dataConversion(elem, sizesArray, labels){
     if (elem.children != undefined && elem.children[0].size != undefined){
 	childrenSizes = [];
 	childrenLabels = [];	
@@ -20,4 +27,4 @@ function dataSizes(elem, sizesArray, labels){
 
 var data = new Array;
 var labels = new Array;
-dataSizes(originalData, data, labels);
+dataConversion(originalData, data, labels);
