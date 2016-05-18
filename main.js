@@ -85,6 +85,7 @@ app.get('/export', function(req,res){
     archive.append(fs.createReadStream('public/visualisation/fatum.js.mem'), {name:'treemap_visualisation/fatum.js.mem'});
     archive.append(fs.createReadStream('public/visualisation/index.html'), {name:'treemap_visualisation/visualisation.html'});
     archive.append(fs.createReadStream('public/visualisation/tree_visu.js'), {name:'treemap_visualisation/tree_visu.js'});
+    archive.append(fs.createReadStream('public/visualisation/tree_visu_2.js'), {name:'treemap_visualisation/tree_visu_2.js'});
     archive.append(fs.createReadStream('public/visualisation/index.css'), {name:'treemap_visualisation/index.css'});
 
     archive.finalize();
