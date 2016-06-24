@@ -16,9 +16,6 @@
 
  *  You should have received a copy of the GNU General Public License
  along with mowgli.  If not, see <http://www.gnu.org/licenses/>.
- 
- * Authors:
- * Baba BARO - Savandara BESSE - Kristina KASTANO - Alexia SOUVANE
 
 
 - Pour pouvoir utiliser cette application web localement il est nécessaire
