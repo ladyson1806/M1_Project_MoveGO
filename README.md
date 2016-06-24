@@ -1,4 +1,5 @@
  MoveGO: Outil web pour la visualisation d'annotations fonctionnelles
+ 
  Copyright (C) 2016  Baba BARO - Savandara BESSE - Kristina KASTANO - Alexia SOUVANE
  
  *  This file is part of MoveGO
