@@ -1,4 +1,5 @@
  MoveGO: Outil web pour la visualisation d'annotations fonctionnelles
+ 
  Webtool for the visulization of enriched GO terms in a gene list
  
  Copyright (C) 2016  Baba BARO - Savandara BESSE - Kristina KASTANO - Alexia SOUVANE
