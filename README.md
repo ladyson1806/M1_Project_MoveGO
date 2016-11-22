@@ -1,4 +1,5 @@
  MoveGO: Outil web pour la visualisation d'annotations fonctionnelles
+ Webtool for the visulization of enriched GO terms in a gene list
  
  Copyright (C) 2016  Baba BARO - Savandara BESSE - Kristina KASTANO - Alexia SOUVANE
  
@@ -20,19 +21,16 @@
 
 How to use
 * To run this web application locally, you need nodejs and npm 
+* To install all necessary packages use the command npm install in the downloaded directory
 * Then you can run the server with the command node main.js
 * You can access the web tool at the adress localhost:300
-* You can now upload a csv file that has to have this structure of the example file ZhouMesureHuman.csv
+* You can now upload a csv file that has to have the structure of the example file ZhouMesureHuman.csv
 
 
 Instructions d'utilisation
 - Pour pouvoir utiliser cette application web localement il est nécessaire
 d'avoir installé sur votre ordinateur la plateforme nodejs et son package manager
-npm. Sous linux avec les commandes 
- > aptitude install node
- > aptitude install npm
-
-Sous windows sur le site https://nodejs.org/en/. 
+npm. 
 - Après avoir téléchargé tous le fichiers, lancez la commande
 npm install sur la console sous linux dans le répertoire des fichiers 
 (ça va installer tous le modules node nécessaires pour l'application)
