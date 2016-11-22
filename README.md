@@ -18,6 +18,14 @@
  along with mowgli.  If not, see <http://www.gnu.org/licenses/>.
 
 
+How to use
+* To run this web application locally, you need nodejs and npm 
+* Then you can run the server with the command node main.js
+* You can access the web tool at the adress localhost:300
+* You can now upload a csv file that has to have this structure of the example file ZhouMesureHuman.csv
+
+
+Instructions d'utilisation
 - Pour pouvoir utiliser cette application web localement il est nécessaire
 d'avoir installé sur votre ordinateur la plateforme nodejs et son package manager
 npm. Sous linux avec les commandes 
@@ -31,7 +39,6 @@ npm install sur la console sous linux dans le répertoire des fichiers
 - Lancez le serveur avec la commande node main.js
 - Sur un navigateur web (préférablement firefox) allez à l'adresse localhost:3000
 - Vous pouvez maintenant charger un fichier csv et avoir une jolie visualisation !
-
 - Structure du fichier à charger
  - Un exemple est le fichier ZhouMesureHuman.csv
  - Exemple généralisé 
@@ -42,6 +49,5 @@ npm install sur la console sous linux dans le répertoire des fichiers
     code-term1;gene1;gene2;..;genen; 
     
     code-termn;gene1;gene2;..;genen; 
-
  - Chaque cluster numeroté est suivi par la liste de noms de termes qui l'annotent.
  - Chaque term GO est suivi par la liste de gènes annotés par lui.
