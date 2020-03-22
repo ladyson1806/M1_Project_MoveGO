@@ -1,10 +1,10 @@
  # MoveGO: Outil web pour la visualisation d'annotations fonctionnelles
  
  - Developers: Savandara BESSE - Kristina KASTANO - Alexia SOUVANE (Copyright (C) 2016)  
- - M1 Project for Master's Degree in Bioinformatics (University of Bordeaux, FRANCE)
- 
+
  ## Description
- Webtool for the visulization of enriched GO terms for a gene list
+ - M1 Project for Master's Degree in Bioinformatics (University of Bordeaux, FRANCE)
+ - Webtool for the visulization of enriched GO terms for a gene list
  
 _____________________
  
