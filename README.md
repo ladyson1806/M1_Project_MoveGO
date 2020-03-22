@@ -1,9 +1,10 @@
  # MoveGO: Outil web pour la visualisation d'annotations fonctionnelles
  
- ## Developers: Savandara BESSE - Kristina KASTANO - Alexia SOUVANE (Copyright (C) 2016)  
- ## M1 Project for Master's Degree in Bioinformatics (University of Bordeaux, FRANCE)
-
-*Webtool for the visulization of enriched GO terms for a gene list*
+ - Developers: Savandara BESSE - Kristina KASTANO - Alexia SOUVANE (Copyright (C) 2016)  
+ - M1 Project for Master's Degree in Bioinformatics (University of Bordeaux, FRANCE)
+ 
+ ## Description
+ Webtool for the visulization of enriched GO terms for a gene list
  
 _____________________
  
@@ -41,10 +42,10 @@ Instructions d'utilisation
 
 ### CSV template
 - Check the example file ZhouMesureHuman.csv
-> - A generalized example: 
-> Cluster_1;nom-term1;nom-term2;nom-term3;...;nom-termn; 
-> Cluster_n;term1;term2;...;nom-termn; 
-> code-term1;gene1;gene2;..;genen; 
+- A generalized example: 
+> Cluster_1;nom-term1;nom-term2;nom-term3;...;nom-termn; <br>
+> Cluster_n;term1;term2;...;nom-termn; <br>
+> code-term1;gene1;gene2;..;genen; <br>
 > code-termn;gene1;gene2;..;genen; 
     
 - Each annotated cluster is associated with a list of GO terms
